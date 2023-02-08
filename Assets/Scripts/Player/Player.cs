@@ -29,11 +29,14 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
     private void Awake()
     {
+        InitInputs();
         Setup();
     }
 
     protected override void Update()
     {
+        UpdateInputs();
+
         base.Update();
     }
 }
