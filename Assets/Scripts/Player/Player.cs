@@ -17,9 +17,14 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Max
     }
 
+    public Rigidbody rigidbody { get; private set; }
+
 
     protected override void Setup()
     {
+        rigidbody = GetComponent<Rigidbody>();
+
+
         states = new FSMState<Player>[(int)PlayerStates.Max];
 
         states[(int)PlayerStates.Idle] = new PlayerIdleState(this);
@@ -27,7 +32,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         ChangeState(PlayerStates.Idle);
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         InitInputs();
         Setup();
