@@ -37,7 +37,7 @@ public class PlayerIdleState : FSMState<Player>
 
         var dir = mainCameraTransform.forward * input.y;
         dir += mainCameraTransform.right * input.x;
-        dir.Normalize();
+        //dir.Normalize();
 
         dir *= 10; // 임시 속도
 
