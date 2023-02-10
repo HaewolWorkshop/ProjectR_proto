@@ -7,12 +7,13 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     enum PlayerStates : int
     {
         Idle = 0,
-        Attack,
-        Skill,
+        Move,
         Dash,
         Guard,
         Jump,
         Fall,
+        Attack,
+        Skill,
 
         Max
     }
