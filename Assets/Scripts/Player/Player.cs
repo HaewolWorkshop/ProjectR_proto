@@ -19,11 +19,13 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     }
 
     public Rigidbody rigidbody { get; private set; }
+    public Animator animator { get; private set; }
 
 
     protected override void Setup()
     {
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
 
         states = new FSMState<Player>[(int)PlayerStates.Max];

@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class PlayerIdleState : FSMState<Player>
 {
+    private readonly int ForwardAnimParam = Animator.StringToHash("Forward");
     private Transform mainCameraTransform;
+
+    private float moveSpeed = 3; //임시 속도
+    private float rotationSpeed = 10; //임시 속도 2
 
     public PlayerIdleState(IFSMEntity owner) : base(owner)
     {
@@ -20,11 +24,12 @@ public class PlayerIdleState : FSMState<Player>
 
     public override void UpdateState()
     {
-
     }
 
     public override void FixedUpdateState()
     {
+        var realSpeed = ownerEntity.rigidbody.velocity.magnitude;
+        ownerEntity.animator.SetFloat(ForwardAnimParam, realSpeed / moveSpeed);
     }
 
     public override void ClearState()
@@ -33,42 +38,33 @@ public class PlayerIdleState : FSMState<Player>
 
     private void OnMove(Vector2 input)
     {
-        Debug.Log(input);
+        var forward = mainCameraTransform.forward;
+        var right = mainCameraTransform.right;
+        forward.y = 0;
+        right.y = 0;
 
-        var dir = mainCameraTransform.forward * input.y;
-        dir += mainCameraTransform.right * input.x;
-        //dir.Normalize();
+        forward.Normalize();
+        right.Normalize();
 
-        dir *= 10; // 임시 속도
+        right *= input.x;
+        forward *= input.y;
 
-        //var projectedVelocity = Vector3.ProjectOnPlane(dir, )
+        ownerEntity.rigidbody.velocity = (right + forward) * moveSpeed;
 
-        ownerEntity.rigidbody.velocity = dir;
-
-        HandleRotation(input);
+        HandleRotation(ownerEntity.rigidbody.velocity);
     }
 
-
-    private void HandleRotation(Vector2 input)
+    private void HandleRotation(Vector3 dir)
     {
-        var dir = Vector3.zero;
-
-        dir = mainCameraTransform.forward * input.y;
-        dir += mainCameraTransform.right * input.x;
-
-        dir.Normalize();
-        dir.y = 0;
-
         if (dir == Vector3.zero)
         {
             dir = ownerEntity.transform.forward;
         }
 
         var look = Quaternion.LookRotation(dir);
-        var targetRotation = Quaternion.Slerp(ownerEntity.transform.rotation, look, 10 * Time.deltaTime); // 임시 속도 2
+        var targetRotation =
+            Quaternion.Slerp(ownerEntity.transform.rotation, look, rotationSpeed * Time.deltaTime); // 임시 속도
 
         ownerEntity.transform.rotation = targetRotation;
     }
-
-
 }
