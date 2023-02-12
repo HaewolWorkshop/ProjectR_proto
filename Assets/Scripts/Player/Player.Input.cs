@@ -48,11 +48,15 @@ public partial class Player
         inputActions = new global::PlayerInputActions();
 
         moveInputAction = inputActions.Player.Move;
-        camMoveInputAction = inputActions.Player.CamMove;
+        camMoveInputAction = inputActions.Player.Look;
 
         buttonActions.Add(ButtonActions.Jump, inputActions.Player.Jump);
         inputActions.Player.Jump.started += (x) => GetAction(ButtonActions.Jump)?.Invoke(true);
         inputActions.Player.Jump.canceled += (x) => GetAction(ButtonActions.Jump)?.Invoke(false);
+        
+        // 임시
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     protected void UpdateInputs()
@@ -136,5 +140,22 @@ public partial class Player
         {
             buttonEvents.Remove(type);
         }
+    }
+
+
+    public Vector3 ConvertToCameraSpace(Vector3 vector)
+    {
+        var forward = Camera.main.transform.forward;
+        var right = Camera.main.transform.right;
+        forward.y = 0; 
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        right *= vector.x;
+        forward *= vector.z;
+        
+        return right + forward;
     }
 }

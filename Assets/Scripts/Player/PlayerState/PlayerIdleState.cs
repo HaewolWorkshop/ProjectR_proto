@@ -6,14 +6,12 @@ using UnityEngine;
 public class PlayerIdleState : FSMState<Player>
 {
     private readonly int ForwardAnimParam = Animator.StringToHash("Forward");
-    private Transform mainCameraTransform;
 
     private float moveSpeed = 3; //임시 속도
     private float rotationSpeed = 10; //임시 속도 2
 
     public PlayerIdleState(IFSMEntity owner) : base(owner)
     {
-        mainCameraTransform = Camera.main.transform;
     }
 
 
@@ -38,28 +36,21 @@ public class PlayerIdleState : FSMState<Player>
 
     private void OnMove(Vector2 input)
     {
-        var forward = mainCameraTransform.forward;
-        var right = mainCameraTransform.right;
-        forward.y = 0;
-        right.y = 0;
+        var dir = ownerEntity.ConvertToCameraSpace(new Vector3(input.x, 0, input.y));
 
-        forward.Normalize();
-        right.Normalize();
+        ownerEntity.rigidbody.velocity = dir * moveSpeed;
 
-        right *= input.x;
-        forward *= input.y;
-
-        ownerEntity.rigidbody.velocity = (right + forward) * moveSpeed;
-
-        HandleRotation(ownerEntity.rigidbody.velocity);
+        if (input != Vector2.zero)
+        {
+            HandleRotation();
+        }
     }
 
-    private void HandleRotation(Vector3 dir)
+    private void HandleRotation()
     {
-        if (dir == Vector3.zero)
-        {
-            dir = ownerEntity.transform.forward;
-        }
+        var dir = Camera.main.transform.forward;
+        dir.y = 0;
+        dir.Normalize();
 
         var look = Quaternion.LookRotation(dir);
         var targetRotation =
