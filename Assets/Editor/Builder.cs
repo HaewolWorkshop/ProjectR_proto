@@ -7,15 +7,20 @@ using UnityEditor.Build.Reporting;
 
 class Builder
 {
-    static string[] Scenes = FindEnabledEditorScenes();
-    static string GameName = PlayerSettings.productName;
+    private static string BuildSettingPath = $"{Directory.GetCurrentDirectory()}/BuildSetting.txt";
+    private static string[] Scenes = FindEnabledEditorScenes();
 
     [MenuItem("Build/빌드하기")]
     public static void Build()
     {
-        var dir = $"Builds/{PlayerSettings.productName}_{DateTime.Now.ToString("MMddHHmm")}/{PlayerSettings.productName}.exe";
+        var stream = new FileStream(BuildSettingPath,FileMode.Open);
+        var reader = new StreamReader(stream);
 
-        GenericBuild(FindEnabledEditorScenes(), dir, BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows, BuildOptions.None);
+        var dir = $"{reader.ReadLine()}/{PlayerSettings.productName}_{DateTime.Now.ToString("MMddHHmm")}/{PlayerSettings.productName}.exe";
+
+        reader.Close();
+
+        GenericBuild(Scenes, dir, BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows, BuildOptions.None);
     }
 
     public static void GenericBuild(string[] scenes, string target_dir, BuildTargetGroup build_group, BuildTarget build_target, BuildOptions build_options)
@@ -44,7 +49,6 @@ class Builder
             }
 
             scenes.Add(scene.path);
-            Debug.Log(scene.path);
         }
         return scenes.ToArray();
     }
