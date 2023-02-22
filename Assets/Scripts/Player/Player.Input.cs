@@ -179,7 +179,7 @@ public partial class Player
         if (lockYaw)
         {
             var target = Quaternion.Euler(0, cameraFollowTarget.rotation.eulerAngles.y, 0);
-            transform.rotation = target; Quaternion.Slerp(transform.rotation, target, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, target, rotationSpeed * Time.deltaTime);
 
             angles.y = 0;
         }

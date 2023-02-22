@@ -6,8 +6,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
     enum PlayerStates : int
     {
-        Idle = 0,
-        Move,
+        Move = 0,
         Dash,
         Guard,
         Jump,
@@ -36,9 +35,9 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
         states = new FSMState<Player>[(int)PlayerStates.Max];
 
-        states[(int)PlayerStates.Idle] = new PlayerIdleState(this);
+        states[(int)PlayerStates.Move] = new PlayerMoveState(this);
 
-        ChangeState(PlayerStates.Idle);
+        ChangeState(PlayerStates.Move);
     }
 
     protected override void Awake()
