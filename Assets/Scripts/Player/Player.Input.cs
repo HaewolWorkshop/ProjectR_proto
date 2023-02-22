@@ -143,47 +143,30 @@ public partial class Player
     }
 
 
-    public Vector3 ConvertToCameraSpace(Vector3 vector)
-    {
-        var forward = Camera.main.transform.forward;
-        var right = Camera.main.transform.right;
-        forward.y = 0;
-        right.y = 0;
-
-        forward.Normalize();
-        right.Normalize();
-
-        right *= vector.x;
-        forward *= vector.z;
-
-        return right + forward;
-    }
-
-
     public void HandleCameraRotation(Vector2 look, bool lockYaw)
     {
-        if (inverseY)
+        if (Data.InverseY)
         {
             look.y *= -1;
         }
 
-        cameraFollowTarget.rotation *= Quaternion.AngleAxis(look.y * lookSpeed * Time.deltaTime, Vector3.right);
-        cameraFollowTarget.rotation *= Quaternion.AngleAxis(look.x * lookSpeed * Time.deltaTime, Vector3.up);
+        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.y * Data.LookSpeed * Time.deltaTime, Vector3.right);
+        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.x * Data.LookSpeed * Time.deltaTime, Vector3.up);
 
-        var angles = cameraFollowTarget.localEulerAngles;
+        var angles = cameraLookAtTarget.localEulerAngles;
 
-        angles.x = Mathf.Clamp(angles.x > 180 ? angles.x - 360 : angles.x, cameraMinYAngle, cameraMaxYAngle);
+        angles.x = Mathf.Clamp(angles.x > 180 ? angles.x - 360 : angles.x, Data.CameraMinYAngle, Data.CameraMaxYAngle);
         angles.z = 0;
 
 
         if (lockYaw)
         {
-            var target = Quaternion.Euler(0, cameraFollowTarget.rotation.eulerAngles.y, 0);
-            transform.rotation = Quaternion.Slerp(transform.rotation, target, rotationSpeed * Time.deltaTime);
+            var target = Quaternion.Euler(0, cameraLookAtTarget.rotation.eulerAngles.y, 0);
+            transform.rotation = target; Quaternion.Slerp(transform.rotation, target, Data.RotationSpeed * Time.deltaTime);
 
             angles.y = 0;
         }
 
-        cameraFollowTarget.localEulerAngles = angles;
+        cameraLookAtTarget.localEulerAngles = angles;
     }
 }

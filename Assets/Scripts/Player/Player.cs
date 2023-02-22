@@ -4,9 +4,10 @@ using UnityEngine;
 
 public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
-    enum PlayerStates : int
+    public enum PlayerStates : int
     {
-        Move = 0,
+        Idle = 0,
+        Move,
         Dash,
         Guard,
         Jump,
@@ -17,27 +18,32 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Max
     }
 
+
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
 
+
+    [SerializeField] private Transform cameraLookAtTarget;
+    public Transform CameraLookAtTarget => cameraLookAtTarget;
+
     [SerializeField] private Transform cameraFollowTarget;
-    [SerializeField] private float cameraMaxYAngle;
-    [SerializeField] private float cameraMinYAngle;
-    [SerializeField] private float lookSpeed;
-    [SerializeField] private bool inverseY;
-    [SerializeField] private float rotationSpeed;
+    public Transform CameraFollowTarget => cameraFollowTarget;
+
+
+    [SerializeField] private PlayerData[] data;
+    public PlayerData Data => data[0];
 
     protected override void Setup()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-
         states = new FSMState<Player>[(int)PlayerStates.Max];
 
+        states[(int)PlayerStates.Idle] = new PlayerIdleState(this);
         states[(int)PlayerStates.Move] = new PlayerMoveState(this);
 
-        ChangeState(PlayerStates.Move);
+        ChangeState(PlayerStates.Idle);
     }
 
     protected override void Awake()
