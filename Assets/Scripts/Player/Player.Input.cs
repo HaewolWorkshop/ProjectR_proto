@@ -23,7 +23,7 @@ public partial class Player
 
     // 벡터넘겨주는 액션은 따로 처리
     public UnityAction<Vector2> onMove { get; set; }
-    public UnityAction<Vector2> onCameraMove { get; set; }
+    public UnityAction<Vector2> onLook { get; set; }
 
 
     private Dictionary<ButtonActions, InputAction> buttonActions;
@@ -35,7 +35,7 @@ public partial class Player
 
     private PlayerInputActions inputActions;
     private InputAction moveInputAction;
-    private InputAction camMoveInputAction;
+    private InputAction lookInputAction;
 
     private void InitInputs()
     {
@@ -48,12 +48,12 @@ public partial class Player
         inputActions = new global::PlayerInputActions();
 
         moveInputAction = inputActions.Player.Move;
-        camMoveInputAction = inputActions.Player.Look;
+        lookInputAction = inputActions.Player.Look;
 
         buttonActions.Add(ButtonActions.Jump, inputActions.Player.Jump);
         inputActions.Player.Jump.started += (x) => GetAction(ButtonActions.Jump)?.Invoke(true);
         inputActions.Player.Jump.canceled += (x) => GetAction(ButtonActions.Jump)?.Invoke(false);
-        
+
         // 임시
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -62,10 +62,10 @@ public partial class Player
     protected void UpdateInputs()
     {
         var moveInput = moveInputAction.ReadValue<Vector2>();
-        var camMoveInput = camMoveInputAction.ReadValue<Vector2>();
+        var lookInput = lookInputAction.ReadValue<Vector2>();
 
         onMove?.Invoke(moveInput);
-        onCameraMove?.Invoke(camMoveInput);
+        onLook?.Invoke(lookInput);
     }
 
     private void OnEnable()
@@ -147,7 +147,7 @@ public partial class Player
     {
         var forward = Camera.main.transform.forward;
         var right = Camera.main.transform.right;
-        forward.y = 0; 
+        forward.y = 0;
         right.y = 0;
 
         forward.Normalize();
@@ -155,7 +155,35 @@ public partial class Player
 
         right *= vector.x;
         forward *= vector.z;
-        
+
         return right + forward;
+    }
+
+
+    public void HandleCameraRotation(Vector2 look, bool lockYaw)
+    {
+        if (inverseY)
+        {
+            look.y *= -1;
+        }
+
+        cameraFollowTarget.rotation *= Quaternion.AngleAxis(look.y * lookSpeed * Time.deltaTime, Vector3.right);
+        cameraFollowTarget.rotation *= Quaternion.AngleAxis(look.x * lookSpeed * Time.deltaTime, Vector3.up);
+
+        var angles = cameraFollowTarget.localEulerAngles;
+
+        angles.x = Mathf.Clamp(angles.x > 180 ? angles.x - 360 : angles.x, cameraMinYAngle, cameraMaxYAngle);
+        angles.z = 0;
+
+
+        if (lockYaw)
+        {
+            var target = Quaternion.Euler(0, cameraFollowTarget.rotation.eulerAngles.y, 0);
+            transform.rotation = target; Quaternion.Slerp(transform.rotation, target, rotationSpeed * Time.deltaTime);
+
+            angles.y = 0;
+        }
+
+        cameraFollowTarget.localEulerAngles = angles;
     }
 }
