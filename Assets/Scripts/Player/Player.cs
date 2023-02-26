@@ -22,13 +22,6 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     public Animator animator { get; private set; }
 
 
-    [SerializeField] private Transform cameraLookAtTarget;
-    public Transform CameraLookAtTarget => cameraLookAtTarget;
-
-    [SerializeField] private Transform cameraFollowTarget;
-    public Transform CameraFollowTarget => cameraFollowTarget;
-
-
     [SerializeField] private PlayerData[] data;
     public PlayerData Data => data[0];
 

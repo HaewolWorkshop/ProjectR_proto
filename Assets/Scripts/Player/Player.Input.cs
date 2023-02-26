@@ -96,8 +96,7 @@ public partial class Player
         }
         return null;
     }
-
-
+    
     public bool GetActionValue(ButtonActions type)
     {
         if (buttonActions.TryGetValue(type, out var input))
@@ -115,8 +114,7 @@ public partial class Player
         }
         return 0;
     }
-
-
+    
     public void SetAction(ButtonActions type, UnityAction<bool> action, bool update = true)
     {
         if (!buttonEvents.ContainsKey(type))
@@ -140,33 +138,5 @@ public partial class Player
         {
             buttonEvents.Remove(type);
         }
-    }
-
-
-    public void HandleCameraRotation(Vector2 look, bool lockYaw)
-    {
-        if (Data.InverseY)
-        {
-            look.y *= -1;
-        }
-
-        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.y * Data.LookSpeed * Time.deltaTime, Vector3.right);
-        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.x * Data.LookSpeed * Time.deltaTime, Vector3.up);
-
-        var angles = cameraLookAtTarget.localEulerAngles;
-
-        angles.x = Mathf.Clamp(angles.x > 180 ? angles.x - 360 : angles.x, Data.CameraMinYAngle, Data.CameraMaxYAngle);
-        angles.z = 0;
-
-
-        if (lockYaw)
-        {
-            var target = Quaternion.Euler(0, cameraLookAtTarget.rotation.eulerAngles.y, 0);
-            transform.rotation = target; Quaternion.Slerp(transform.rotation, target, Data.RotationSpeed * Time.deltaTime);
-
-            angles.y = 0;
-        }
-
-        cameraLookAtTarget.localEulerAngles = angles;
     }
 }
