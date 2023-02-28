@@ -25,22 +25,14 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     [SerializeField] private PlayerData[] data;
     public PlayerData Data => data[0];
 
-    protected override void Setup()
+    protected void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        states = new FSMState<Player>[(int)PlayerStates.Max];
-
-        states[(int)PlayerStates.Move] = new PlayerNormalMoveState(this);
-
-        ChangeState(PlayerStates.Move);
-    }
-
-    protected override void Awake()
-    {
+        
         InitInputs();
-        Setup();
+        
+        SetUp(PlayerStates.Move);
     }
 
     protected override void Update()

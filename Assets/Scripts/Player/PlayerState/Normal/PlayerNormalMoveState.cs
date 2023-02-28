@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[FSMState ((int)Player.PlayerStates.Move)]
 public class PlayerNormalMoveState : PlayerMoveState
 {
     public PlayerNormalMoveState(IFSMEntity owner) : base(owner)

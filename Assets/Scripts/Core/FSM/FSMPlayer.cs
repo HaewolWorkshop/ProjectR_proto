@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public interface IFSMEntity
@@ -8,16 +11,11 @@ public interface IFSMEntity
 
 public abstract class FSMPlayer<T> : MonoBehaviour where T : IFSMEntity
 {
-    protected FSMState<T>[] states;
+    private Dictionary<int, FSMState<T>> states;
 
     private FSMState<T> currentState = null;
     private FSMState<T> previousState = null;
     private FSMState<T> globalState = null;
-
-    protected virtual void Awake()
-    {
-        Setup();
-    }
 
     protected virtual void Update()
     {
@@ -30,25 +28,41 @@ public abstract class FSMPlayer<T> : MonoBehaviour where T : IFSMEntity
         globalState?.FixedUpdateState();
         currentState?.FixedUpdateState();
     }
+    
+    protected void SetUp(ValueType firstState)
+    {
+        states = new Dictionary<int, FSMState<T>>();
+        var stateTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => typeof(FSMState<T>) != t && typeof(FSMState<T>).IsAssignableFrom(t));
 
-    /// <summary>
-    /// states를 초기화하고 ChangeState를 실행시키시오
-    /// </summary>
-    protected abstract void Setup();
+        foreach (var stateType in stateTypes)
+        {
+            var attribute = stateType.GetCustomAttribute<FSMStateAttribute>();
+
+            if (attribute == null)
+            {
+                continue;
+            }
+            
+            var state = Activator.CreateInstance(stateType, this as IFSMEntity) as FSMState<T>;
+            
+            if (!states.TryAdd(attribute.key, state))
+            {
+                Debug.LogError($"{typeof(T)} 의 {attribute.key} 키가 중복되었습니다.");
+            }
+        }
+        
+        ChangeState(firstState);
+    }
 
     public void ChangeState(ValueType enumValue)
     {
-#if UNITY_EDITOR
-
-        var value = (int)enumValue;
-        if (value < 0 || value > states.Length)
+        if (!states.TryGetValue((int) enumValue, out var state))
         {
             Debug.LogError($"{GetType()} : 사용할 수 없는 상태입니다. {enumValue}");
             return;
         }
-
-#endif
-        ChangeState(states[(int)enumValue]);
+        
+        ChangeState(state);
     }
 
     private void ChangeState(FSMState<T> newState)

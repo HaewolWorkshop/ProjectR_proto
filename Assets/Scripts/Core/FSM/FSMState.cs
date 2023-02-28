@@ -1,3 +1,17 @@
+using System;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class FSMStateAttribute : System.Attribute
+{
+    public int key;
+
+    public FSMStateAttribute(int key)
+    {
+        this.key = key;
+    }
+}
+
+
 public abstract class FSMState<T> where T : IFSMEntity
 {
     protected T ownerEntity;
@@ -9,6 +23,6 @@ public abstract class FSMState<T> where T : IFSMEntity
 
     public FSMState(IFSMEntity owner)
     {
-        ownerEntity = (T)owner;
+        ownerEntity = (T) owner;
     }
 }
