@@ -5,14 +5,14 @@ using UnityEngine;
 
 public abstract class PlayerMoveState : FSMState<Player>
 {
-    private readonly int ForwardAnimParam = Animator.StringToHash("Forward");
+    private readonly int InputXAnimParam = Animator.StringToHash("InputX");
+    private readonly int InputYAnimParam = Animator.StringToHash("InputY");
 
     private Vector2 moveInput;
 
     public PlayerMoveState(IFSMEntity owner) : base(owner)
     {
     }
-
 
     public override void InitializeState()
     {
@@ -27,6 +27,7 @@ public abstract class PlayerMoveState : FSMState<Player>
             var ownerTransform = ownerEntity.transform;
 
             var target = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+
             ownerTransform.rotation = Quaternion.Slerp(ownerTransform.rotation, target,
                 ownerEntity.Data.RotationSpeed * Time.deltaTime);
         }
@@ -36,9 +37,8 @@ public abstract class PlayerMoveState : FSMState<Player>
     {
         var moveSpeed = ownerEntity.Data.MoveSpeed;
 
-        //var realSpeed = ownerEntity.rigidbody.velocity.magnitude;
-        //ownerEntity.animator.SetFloat(ForwardAnimParam, realSpeed / moveSpeed);
-        ownerEntity.animator.SetFloat(ForwardAnimParam, moveInput.magnitude);
+        ownerEntity.animator.SetFloat(InputXAnimParam, Mathf.Round(moveInput.x * 100f) / 100f);
+        ownerEntity.animator.SetFloat(InputYAnimParam, Mathf.Round(moveInput.y * 100f) / 100f);
 
         var velocity = (new Vector3(moveInput.x, 0, moveInput.y)).RotateToTransformSpace(ownerEntity.transform) *
                        moveSpeed;
