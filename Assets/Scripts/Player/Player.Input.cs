@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public partial class Player
 {
+
+
     public enum ButtonActions // bool 값으로 입력받는 액션
     {
         Attack,
@@ -23,6 +25,8 @@ public partial class Player
 
     // 벡터넘겨주는 액션은 따로 처리
     public UnityAction<Vector2> onMove { get; set; }
+    private InputVector2Damper moveInputDamper = new InputVector2Damper();
+
     public UnityAction<Vector2> onLook { get; set; }
 
 
@@ -61,7 +65,7 @@ public partial class Player
 
     protected void UpdateInputs()
     {
-        var moveInput = moveInputAction.ReadValue<Vector2>();
+        var moveInput = moveInputDamper.getDampedValue(moveInputAction.ReadValue<Vector2>(), Time.deltaTime);
         var lookInput = lookInputAction.ReadValue<Vector2>();
 
         onMove?.Invoke(moveInput);
