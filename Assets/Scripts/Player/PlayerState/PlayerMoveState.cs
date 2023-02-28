@@ -8,7 +8,6 @@ public class PlayerMoveState : FSMState<Player>
     private readonly int ForwardAnimParam = Animator.StringToHash("Forward");
 
     private Vector2 moveInput;
-    private Vector2 lookInput;
 
     public PlayerMoveState(IFSMEntity owner) : base(owner)
     {
@@ -18,7 +17,6 @@ public class PlayerMoveState : FSMState<Player>
     public override void InitializeState()
     {
         ownerEntity.onMove = (x) => moveInput = x;
-        ownerEntity.onLook = (x) => lookInput = x;
     }
 
     public override void UpdateState()
@@ -38,8 +36,9 @@ public class PlayerMoveState : FSMState<Player>
     {
         var moveSpeed = ownerEntity.Data.MoveSpeed;
 
-        var realSpeed = ownerEntity.rigidbody.velocity.magnitude;
-        ownerEntity.animator.SetFloat(ForwardAnimParam, realSpeed / moveSpeed);
+        //var realSpeed = ownerEntity.rigidbody.velocity.magnitude;
+        //ownerEntity.animator.SetFloat(ForwardAnimParam, realSpeed / moveSpeed);
+        ownerEntity.animator.SetFloat(ForwardAnimParam, moveInput.magnitude);
 
         var velocity = (new Vector3(moveInput.x, 0, moveInput.y)).RotateToTransformSpace(ownerEntity.transform) *
                        moveSpeed;
