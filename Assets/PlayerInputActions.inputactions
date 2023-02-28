@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Stealth",
+                    "type": "Button",
+                    "id": "7d9d357b-e2fc-4268-a07a-b1c370dc7420",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "23cec292-db95-431a-82f0-f70ec6ecb0fc",
@@ -235,6 +244,17 @@
                 },
                 {
                     "name": "",
+                    "id": "793b8b03-127a-4836-be64-f5a5ceedc693",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ff718d54-9b9d-4429-84ad-8a2c6de5663d",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -263,6 +283,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "330e3df3-2668-43d0-9ac4-e4fd17e45fc4",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stealth",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

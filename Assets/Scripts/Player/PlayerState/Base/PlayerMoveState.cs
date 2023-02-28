@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerMoveState : FSMState<Player>
+public abstract class PlayerMoveState : FSMState<Player>
 {
     private readonly int ForwardAnimParam = Animator.StringToHash("Forward");
 

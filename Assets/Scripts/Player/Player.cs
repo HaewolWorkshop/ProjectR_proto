@@ -13,7 +13,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Fall,
         Attack,
         Skill,
-
+        Stealth,
         Max
     }
 
@@ -32,7 +32,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
         states = new FSMState<Player>[(int)PlayerStates.Max];
 
-        states[(int)PlayerStates.Move] = new PlayerMoveState(this);
+        states[(int)PlayerStates.Move] = new PlayerNormalMoveState(this);
 
         ChangeState(PlayerStates.Move);
     }

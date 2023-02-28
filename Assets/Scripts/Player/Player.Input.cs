@@ -14,8 +14,9 @@ public partial class Player
         Guard,
         Jump,
         Dash,
+        Stealth,
         Skill1,
-        Skill2
+        Skill2,
     }
 
     public enum ValueActions //float 값으로 입력받는 액션
@@ -57,6 +58,10 @@ public partial class Player
         buttonActions.Add(ButtonActions.Jump, inputActions.Player.Jump);
         inputActions.Player.Jump.started += (x) => GetAction(ButtonActions.Jump)?.Invoke(true);
         inputActions.Player.Jump.canceled += (x) => GetAction(ButtonActions.Jump)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Stealth, inputActions.Player.Stealth);
+        inputActions.Player.Stealth.started += (x) => GetAction(ButtonActions.Stealth)?.Invoke(true);
+        inputActions.Player.Stealth.canceled += (x) => GetAction(ButtonActions.Stealth)?.Invoke(false);
 
         // 임시
         Cursor.visible = false;
