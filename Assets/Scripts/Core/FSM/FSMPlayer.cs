@@ -78,6 +78,10 @@ public abstract class FSMPlayer<T> : MonoBehaviour where T : IFSMEntity
 
         currentState = newState;
         currentState.InitializeState();
+
+
+
+        Debug.Log($"{this.GetType()} : {newState.GetType()} 상태로 전환");
     }
 
     public void SetGlobalState(FSMState<T> newState)

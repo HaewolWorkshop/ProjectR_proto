@@ -20,3 +20,4 @@ MonoBehaviour:
   cameraReCenterSpeed: 15
   moveSpeed: 4
   rotationSpeed: 6
+  jumpPower: 100

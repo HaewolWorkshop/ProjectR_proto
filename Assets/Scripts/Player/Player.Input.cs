@@ -121,10 +121,11 @@ public partial class Player
         {
             return input.ReadValue<float>();
         }
+
         return 0;
     }
     
-    public void SetAction(ButtonActions type, UnityAction<bool> action, bool update = true)
+    public void SetAction(ButtonActions type, UnityAction<bool> action, bool update = false)
     {
         if (!buttonEvents.ContainsKey(type))
         {

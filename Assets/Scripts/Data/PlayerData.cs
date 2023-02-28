@@ -33,4 +33,7 @@ public class PlayerData : ScriptableObject
 
     [SerializeField] private float rotationSpeed;
     public float RotationSpeed => rotationSpeed;
+
+    [SerializeField] private float jumpPower;
+    public float JumpPower => jumpPower;
 }
