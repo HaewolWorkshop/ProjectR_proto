@@ -6,6 +6,8 @@ using UnityEngine;
 [FSMState((int) Player.States.NormalMove)]
 public class PlayerNormalMoveState : PlayerMoveState
 {
+    protected override float moveSpeed => ownerEntity.Data.MoveSpeed;
+    
     public PlayerNormalMoveState(IFSMEntity owner) : base(owner)
     {
     }
@@ -40,7 +42,7 @@ public class PlayerNormalMoveState : PlayerMoveState
     {
         if (isOn)
         {
-            ownerEntity.ChangeState(Player.States.HenshinGuard);
+            ownerEntity.ChangeState(Player.States.Henshin);
         }
     }
 

@@ -10,6 +10,8 @@ public abstract class PlayerMoveState : FSMState<Player>
 
     private Vector2 moveInput;
 
+    protected abstract float moveSpeed { get; }
+
     public PlayerMoveState(IFSMEntity owner) : base(owner)
     {
     }
@@ -35,8 +37,6 @@ public abstract class PlayerMoveState : FSMState<Player>
 
     public override void FixedUpdateState()
     {
-        var moveSpeed = ownerEntity.Data.MoveSpeed;
-
         ownerEntity.animator.SetFloat(InputXAnimParam, Mathf.Round(moveInput.x * 100f) / 100f);
         ownerEntity.animator.SetFloat(InputYAnimParam, Mathf.Round(moveInput.y * 100f) / 100f);
 

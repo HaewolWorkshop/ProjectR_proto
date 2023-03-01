@@ -26,7 +26,12 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
-
+    
+    [SerializeField] private Animator normalModel;
+    public Animator NormalModel => normalModel;
+    
+    [SerializeField] private Animator henshinModel;
+    public Animator HenshinModel => henshinModel;
 
     [SerializeField] private PlayerData[] data;
     public PlayerData Data => data[0];
