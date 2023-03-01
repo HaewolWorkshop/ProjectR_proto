@@ -3,31 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[FSMState((int)Player.NormalStates.Jump)]
+[FSMState((int)Player.States.NormalJump)]
 
 public class PlayerNormalJumpState : PlayerJumpState
 {
     public PlayerNormalJumpState(IFSMEntity owner) : base(owner)
     {
     }
-
-    public override void ClearState()
+    
+    protected override void OnJumpFinish()
     {
-        base.ClearState();
-    }
-
-    public override void FixedUpdateState()
-    {
-        base.FixedUpdateState();
-    }
-
-    public override void InitializeState()
-    {
-        base.InitializeState();
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
+        ownerEntity.ChangeState(Player.States.NormalMove);
     }
 }

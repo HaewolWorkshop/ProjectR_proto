@@ -3,33 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[FSMState ((int)Player.NormalStates.Move)]
+[FSMState((int) Player.States.NormalMove)]
 public class PlayerNormalMoveState : PlayerMoveState
 {
     public PlayerNormalMoveState(IFSMEntity owner) : base(owner)
     {
-
     }
 
     public override void InitializeState()
     {
         base.InitializeState();
 
-        // Jump
         ownerEntity.SetAction(Player.ButtonActions.Jump, OnJump);
-
-        // Sitting
         ownerEntity.SetAction(Player.ButtonActions.Stealth, OnStealth);
+
+        ownerEntity.SetAction(Player.ButtonActions.Henshin, OnHenshin);
     }
 
-    private void OnJump(bool isTrigger)
+    private void OnJump(bool isOn)
     {
-        ownerEntity.ChangeState(Player.NormalStates.Jump);
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.NormalJump);
+        }
     }
 
-    private void OnStealth(bool isTrigger)
+    private void OnStealth(bool isOn)
     {
-        ownerEntity.ChangeState(Player.NormalStates.Stealth);
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.NormalStealth);
+        }
+    }
+
+    private void OnHenshin(bool isOn)
+    {
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.HenshinGuard);
+        }
     }
 
     public override void ClearState()

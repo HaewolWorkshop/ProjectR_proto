@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 
 public partial class Player
 {
-
-
     public enum ButtonActions // bool 값으로 입력받는 액션
     {
+        Henshin,
         Attack,
         Guard,
         Jump,
@@ -54,7 +53,11 @@ public partial class Player
 
         moveInputAction = inputActions.Player.Move;
         lookInputAction = inputActions.Player.Look;
-
+        
+        buttonActions.Add(ButtonActions.Henshin, inputActions.Player.Henshin);
+        inputActions.Player.Henshin.started += (x) => GetAction(ButtonActions.Henshin)?.Invoke(true);
+        inputActions.Player.Henshin.canceled += (x) => GetAction(ButtonActions.Henshin)?.Invoke(false);
+        
         buttonActions.Add(ButtonActions.Jump, inputActions.Player.Jump);
         inputActions.Player.Jump.started += (x) => GetAction(ButtonActions.Jump)?.Invoke(true);
         inputActions.Player.Jump.canceled += (x) => GetAction(ButtonActions.Jump)?.Invoke(false);
@@ -68,7 +71,7 @@ public partial class Player
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    protected void UpdateInputs()
+    private void UpdateInputs()
     {
         var moveInput = moveInputDamper.getDampedValue(moveInputAction.ReadValue<Vector2>(), Time.deltaTime);
         var lookInput = lookInputAction.ReadValue<Vector2>();

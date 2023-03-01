@@ -4,23 +4,24 @@ using UnityEngine;
 
 public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
-    public enum NormalStates : int
+    public enum States : int
     {
-        Move = 0,
-        Dash,
-        Guard,
-        Jump,
-        Fall,
-        Attack,
-        Stealth,
-        Max
-    }
-
-    public enum HenshinStates : int
-    {
-        Move = NormalStates.Max,
-        Jump,
-        Guard
+        Global,
+        
+        NormalMove,
+        NormalDash,
+        NormalGuard,
+        NormalJump,
+        NormalFall,
+        NormalAttack,
+        NormalStealth,
+        
+        BackToNormal,
+        Henshin,
+        
+        HenshinMove,
+        HenshinJump,
+        HenshinGuard,
     }
 
     public Rigidbody rigidbody { get; private set; }
@@ -37,7 +38,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         
         InitInputs();
         
-        SetUp(NormalStates.Move);
+        SetUp(States.NormalMove);
     }
 
     protected override void Update()

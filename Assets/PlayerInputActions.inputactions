@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Henshin",
+                    "type": "Button",
+                    "id": "f2e10616-6993-4a75-8293-076792a231d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Stealth",
                     "type": "Button",
                     "id": "7d9d357b-e2fc-4268-a07a-b1c370dc7420",
@@ -296,6 +305,50 @@
                     "action": "Stealth",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ede325f-da76-4617-8a48-0ea9fa498b03",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Henshin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Sticks",
+                    "id": "0686a046-f941-4eb6-a1ec-882d204170b9",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Henshin",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "04c2de46-8e35-46bf-a8be-5607a04e19bf",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Henshin",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "a8dd84dd-84f8-4d50-8a6a-d3c5fb30f708",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Henshin",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

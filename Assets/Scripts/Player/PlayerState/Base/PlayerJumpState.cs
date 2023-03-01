@@ -30,11 +30,13 @@ public abstract class PlayerJumpState : FSMState<Player>
         if (ownerEntity.rigidbody.velocity.y <= 0 &&
             Physics.Raycast(ownerEntity.transform.position, Vector3.down, out var hit, groundDist, groundLayer))
         {
-            ownerEntity.ChangeState(Player.NormalStates.Move);
+            OnJumpFinish();
         }
     }
 
     public override void ClearState()
     {
     }
+
+    protected abstract void OnJumpFinish();
 }

@@ -46,6 +46,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Henshin"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e10616-6993-4a75-8293-076792a231d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Stealth"",
                     ""type"": ""Button"",
                     ""id"": ""7d9d357b-e2fc-4268-a07a-b1c370dc7420"",
@@ -318,6 +327,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Stealth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ede325f-da76-4617-8a48-0ea9fa498b03"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Sticks"",
+                    ""id"": ""0686a046-f941-4eb6-a1ec-882d204170b9"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""04c2de46-8e35-46bf-a8be-5607a04e19bf"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a8dd84dd-84f8-4d50-8a6a-d3c5fb30f708"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -328,6 +381,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Henshin = m_Player.FindAction("Henshin", throwIfNotFound: true);
         m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
@@ -396,6 +450,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Henshin;
     private readonly InputAction m_Player_Stealth;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Guard;
@@ -409,6 +464,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Henshin => m_Wrapper.m_Player_Henshin;
         public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Guard => m_Wrapper.m_Player_Guard;
@@ -431,6 +487,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Henshin.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
+                @Henshin.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
+                @Henshin.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
                 @Stealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
                 @Stealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
                 @Stealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
@@ -462,6 +521,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Henshin.started += instance.OnHenshin;
+                @Henshin.performed += instance.OnHenshin;
+                @Henshin.canceled += instance.OnHenshin;
                 @Stealth.started += instance.OnStealth;
                 @Stealth.performed += instance.OnStealth;
                 @Stealth.canceled += instance.OnStealth;
@@ -491,6 +553,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnHenshin(InputAction.CallbackContext context);
         void OnStealth(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
