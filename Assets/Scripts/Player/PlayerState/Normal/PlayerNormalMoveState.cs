@@ -16,7 +16,6 @@ public class PlayerNormalMoveState : PlayerMoveState
 
         ownerEntity.SetAction(Player.ButtonActions.Jump, OnJump);
         ownerEntity.SetAction(Player.ButtonActions.Stealth, OnStealth);
-
         ownerEntity.SetAction(Player.ButtonActions.Henshin, OnHenshin);
     }
 
@@ -32,6 +31,7 @@ public class PlayerNormalMoveState : PlayerMoveState
     {
         if (isOn)
         {
+            ownerEntity.animator.SetBool("Stealth", true);
             ownerEntity.ChangeState(Player.States.NormalStealth);
         }
     }
