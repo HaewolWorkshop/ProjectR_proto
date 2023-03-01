@@ -42,6 +42,6 @@ public class PlayerHenshinMoveState : PlayerMoveState
         base.ClearState();
 
         ownerEntity.ClearAction(Player.ButtonActions.Jump);
-        ownerEntity.ClearAction(Player.ButtonActions.Stealth);
+        ownerEntity.ClearAction(Player.ButtonActions.Henshin);
     }
 }

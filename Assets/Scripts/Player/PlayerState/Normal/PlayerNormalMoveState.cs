@@ -52,5 +52,6 @@ public class PlayerNormalMoveState : PlayerMoveState
 
         ownerEntity.ClearAction(Player.ButtonActions.Jump);
         ownerEntity.ClearAction(Player.ButtonActions.Stealth);
+        ownerEntity.ClearAction(Player.ButtonActions.Henshin);
     }
 }

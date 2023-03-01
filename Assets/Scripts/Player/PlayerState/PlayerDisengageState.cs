@@ -12,6 +12,14 @@ public class PlayerDisengageState : FSMState<Player>
 
     public override void InitializeState()
     {
+        ownerEntity.HenshinModel.gameObject.SetActive(false);
+        ownerEntity.NormalModel.gameObject.SetActive(true);
+
+        ownerEntity.animator.avatar = ownerEntity.NormalModel.avatar;
+
+        CameraManager.Instance.SetCamera(CameraType.Normal3rdPerson);
+
+        ownerEntity.ChangeState(Player.States.NormalMove);
     }
 
     public override void UpdateState()
