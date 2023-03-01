@@ -16,7 +16,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         NormalAttack,
         NormalStealth,
         
-        BackToNormal,
+        Disengage,
         Henshin,
         
         HenshinMove,
