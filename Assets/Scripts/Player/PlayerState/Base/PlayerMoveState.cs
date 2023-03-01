@@ -10,7 +10,8 @@ public abstract class PlayerMoveState : FSMState<Player>
 
     private Vector2 moveInput;
 
-    protected abstract float moveSpeed { get; }
+    protected abstract PlayerData data { get; }
+    protected float speedMultiplier = 1;
 
     public PlayerMoveState(IFSMEntity owner) : base(owner)
     {
@@ -31,7 +32,7 @@ public abstract class PlayerMoveState : FSMState<Player>
             var target = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 
             ownerTransform.rotation = Quaternion.Slerp(ownerTransform.rotation, target,
-                ownerEntity.Data.RotationSpeed * Time.deltaTime);
+                data.RotationSpeed * Time.deltaTime);
         }
     }
 
@@ -41,7 +42,7 @@ public abstract class PlayerMoveState : FSMState<Player>
         ownerEntity.animator.SetFloat(InputYAnimParam, Mathf.Round(moveInput.y * 100f) / 100f);
 
         var velocity = (new Vector3(moveInput.x, 0, moveInput.y)).RotateToTransformSpace(ownerEntity.transform) *
-                       moveSpeed;
+                       data.MoveSpeed * speedMultiplier;
         velocity.y = ownerEntity.rigidbody.velocity.y;
         ownerEntity.rigidbody.velocity = velocity;
     }

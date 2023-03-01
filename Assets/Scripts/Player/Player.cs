@@ -33,8 +33,9 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     [SerializeField] private Animator henshinModel;
     public Animator HenshinModel => henshinModel;
 
+    // 임시
     [SerializeField] private PlayerData[] data;
-    public PlayerData Data => data[0];
+    public PlayerData[] Data => data;
 
     protected void Awake()
     {

@@ -6,8 +6,8 @@ using UnityEngine;
 [FSMState((int) Player.States.NormalMove)]
 public class PlayerNormalMoveState : PlayerMoveState
 {
-    protected override float moveSpeed => ownerEntity.Data.MoveSpeed;
-    
+    protected override PlayerData data => ownerEntity.Data[0];
+
     public PlayerNormalMoveState(IFSMEntity owner) : base(owner)
     {
     }

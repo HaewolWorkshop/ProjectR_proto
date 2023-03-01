@@ -6,7 +6,7 @@ using UnityEngine;
 [FSMState((int) Player.States.HenshinMove)]
 public class PlayerHenshinMoveState : PlayerMoveState
 {
-    protected override float moveSpeed => ownerEntity.Data.MoveSpeed;
+    protected override PlayerData data => ownerEntity.Data[1];
     
     public PlayerHenshinMoveState(IFSMEntity owner) : base(owner)
     {

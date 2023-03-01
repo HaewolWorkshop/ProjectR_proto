@@ -5,13 +5,14 @@ using UnityEngine;
 [FSMState((int)Player.States.NormalStealth)]
 public class PlayerStealthState : PlayerMoveState
 {
-    protected override float moveSpeed => ownerEntity.Data.MoveSpeed;
+    protected override PlayerData data => ownerEntity.Data[0];
 
     public PlayerStealthState(IFSMEntity owner) : base(owner){}
 
     public override void InitializeState()
     {
         base.InitializeState();
+        speedMultiplier = data.StealthMoveMultiplier;
     }
 
     public override void UpdateState()
