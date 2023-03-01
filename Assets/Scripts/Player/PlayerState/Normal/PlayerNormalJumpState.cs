@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[FSMState((int)Player.PlayerStates.Jump)]
+[FSMState((int)Player.NormalStates.Jump)]
 
 public class PlayerNormalJumpState : PlayerJumpState
 {

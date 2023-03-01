@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
-    public enum PlayerStates : int
+    public enum NormalStates : int
     {
         Move = 0,
         Dash,
@@ -12,11 +12,16 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Jump,
         Fall,
         Attack,
-        Skill,
         Stealth,
         Max
     }
 
+    public enum HenshinStates : int
+    {
+        Move = NormalStates.Max,
+        Jump,
+        Guard
+    }
 
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
@@ -32,7 +37,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         
         InitInputs();
         
-        SetUp(PlayerStates.Move);
+        SetUp(NormalStates.Move);
     }
 
     protected override void Update()

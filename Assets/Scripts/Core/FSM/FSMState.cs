@@ -3,7 +3,7 @@ using System;
 [AttributeUsage(AttributeTargets.Class)]
 public class FSMStateAttribute : System.Attribute
 {
-    public int key;
+    public readonly int key;
 
     public FSMStateAttribute(int key)
     {
@@ -14,7 +14,7 @@ public class FSMStateAttribute : System.Attribute
 
 public abstract class FSMState<T> where T : IFSMEntity
 {
-    protected T ownerEntity;
+    protected readonly T ownerEntity;
 
     public abstract void InitializeState();
     public abstract void UpdateState();

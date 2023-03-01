@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[FSMState ((int)Player.PlayerStates.Move)]
+[FSMState ((int)Player.NormalStates.Move)]
 public class PlayerNormalMoveState : PlayerMoveState
 {
     public PlayerNormalMoveState(IFSMEntity owner) : base(owner)
@@ -24,12 +24,12 @@ public class PlayerNormalMoveState : PlayerMoveState
 
     private void OnJump(bool isTrigger)
     {
-        ownerEntity.ChangeState(Player.PlayerStates.Jump);
+        ownerEntity.ChangeState(Player.NormalStates.Jump);
     }
 
     private void OnStealth(bool isTrigger)
     {
-        ownerEntity.ChangeState(Player.PlayerStates.Stealth);
+        ownerEntity.ChangeState(Player.NormalStates.Stealth);
     }
 
     public override void ClearState()
