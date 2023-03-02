@@ -583,12 +583,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &591018535 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 591018535, guid: daa2263708a971b4b8c200aed308e30b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2951507103481593331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &756605301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -596,6 +590,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4449918847547417489, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5091242709008108106, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
         type: 3}
       propertyPath: m_Name
@@ -729,8 +728,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 1
-  m_LookAt: {fileID: 591018535}
-  m_Follow: {fileID: 591018535}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_CommonLens: 1
   m_Lens:
     FieldOfView: 50
@@ -2921,6 +2920,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2951507103481593333, guid: daa2263708a971b4b8c200aed308e30b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951507103481593334, guid: daa2263708a971b4b8c200aed308e30b,
+        type: 3}
+      propertyPath: data.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951507103481593334, guid: daa2263708a971b4b8c200aed308e30b,
+        type: 3}
+      propertyPath: data.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 719b5b9e0bbb3e44cb3542651d148ca7,
+        type: 2}
+    - target: {fileID: 2951507103481593336, guid: daa2263708a971b4b8c200aed308e30b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493335793746649617, guid: daa2263708a971b4b8c200aed308e30b,
         type: 3}
       propertyPath: m_Enabled
       value: 1

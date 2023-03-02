@@ -42,4 +42,14 @@ public abstract class FSMEnemy<T> : MonoBehaviour where T : IFSMEntity
         currentState = newState;
         currentState.InitializeState();
     }
+    
+    protected virtual void Update()
+    {
+        currentState?.UpdateState();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        currentState?.FixedUpdateState();
+    }
 }
