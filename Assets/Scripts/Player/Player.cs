@@ -9,12 +9,10 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Global,
         
         NormalMove,
-        NormalDash,
-        NormalGuard,
+        NormalSprint,
+        NormalStealth,
         NormalJump,
         NormalFall,
-        NormalAttack,
-        NormalStealth,
         
         Disengage,
         Henshin,
@@ -24,9 +22,16 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         HenshinGuard,
     }
 
+    private const float groundDist = 0.2f;
+
+
+    public bool isGrounded { get; private set; }
+
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
-    
+
+    [SerializeField] private LayerMask groundLayer;
+
     [SerializeField] private Animator normalModel;
     public Animator NormalModel => normalModel;
     
@@ -52,5 +57,18 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         UpdateInputs();
 
         base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        CheckGround();
+
+        base.FixedUpdate();
+    }
+
+
+    private void CheckGround()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out var hit, groundDist, groundLayer);
     }
 }

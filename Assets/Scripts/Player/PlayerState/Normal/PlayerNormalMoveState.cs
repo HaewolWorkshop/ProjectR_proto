@@ -18,7 +18,18 @@ public class PlayerNormalMoveState : PlayerMoveState
 
         ownerEntity.SetAction(Player.ButtonActions.Jump, OnJump);
         ownerEntity.SetAction(Player.ButtonActions.Stealth, OnStealth);
+        ownerEntity.SetAction(Player.ButtonActions.Sprint, OnSprint);
         ownerEntity.SetAction(Player.ButtonActions.Henshin, OnHenshin);
+    }
+
+    public override void ClearState()
+    {
+        base.ClearState();
+
+        ownerEntity.ClearAction(Player.ButtonActions.Jump);
+        ownerEntity.ClearAction(Player.ButtonActions.Stealth);
+        ownerEntity.ClearAction(Player.ButtonActions.Sprint);
+        ownerEntity.ClearAction(Player.ButtonActions.Henshin);
     }
 
     private void OnJump(bool isOn)
@@ -33,8 +44,15 @@ public class PlayerNormalMoveState : PlayerMoveState
     {
         if (isOn)
         {
-            ownerEntity.animator.SetBool("Stealth", true);
             ownerEntity.ChangeState(Player.States.NormalStealth);
+        }
+    }
+
+    private void OnSprint(bool isOn)
+    {
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.NormalSprint);
         }
     }
 
@@ -44,14 +62,5 @@ public class PlayerNormalMoveState : PlayerMoveState
         {
             ownerEntity.ChangeState(Player.States.Henshin);
         }
-    }
-
-    public override void ClearState()
-    {
-        base.ClearState();
-
-        ownerEntity.ClearAction(Player.ButtonActions.Jump);
-        ownerEntity.ClearAction(Player.ButtonActions.Stealth);
-        ownerEntity.ClearAction(Player.ButtonActions.Henshin);
     }
 }

@@ -5,10 +5,9 @@ using UnityEngine;
 
 public abstract class PlayerJumpState : FSMState<Player>
 {
-    private readonly LayerMask groundLayer = ~LayerMask.GetMask("Player");
-    private const float groundDist = 0.2f;
+    private readonly int IsJumpingAnimKey = Animator.StringToHash("IsJumping");
 
-
+    protected abstract PlayerData data { get; }
 
     public PlayerJumpState(IFSMEntity owner) : base(owner)
     {
@@ -16,8 +15,14 @@ public abstract class PlayerJumpState : FSMState<Player>
 
     public override void InitializeState()
     {
-        ownerEntity.animator.SetTrigger("Jump");
-        ownerEntity.rigidbody.AddForce(new Vector3(0f, ownerEntity.Data[0].JumpPower, 0f));
+        ownerEntity.animator.SetBool(IsJumpingAnimKey, true);
+
+        var velocity = ownerEntity.rigidbody.velocity;
+        velocity.y = data.JumpPower;
+
+        ownerEntity.rigidbody.velocity = velocity;
+
+        ownerEntity.SetAction(Player.ButtonActions.Henshin, OnHenshin);
     }
 
     public override void UpdateState()
@@ -27,18 +32,28 @@ public abstract class PlayerJumpState : FSMState<Player>
 
     public override void FixedUpdateState()
     {
-        Debug.DrawRay(ownerEntity.transform.position, Vector3.down * groundDist, Color.red);
-
-        if (ownerEntity.rigidbody.velocity.y <= 0 &&
-            Physics.Raycast(ownerEntity.transform.position, Vector3.down, out var hit, groundDist, groundLayer))
+        if(ownerEntity.rigidbody.velocity.y <= 0)
         {
-            OnJumpFinish();
+            if(ownerEntity.isGrounded)
+            {
+                ownerEntity.animator.SetBool(IsJumpingAnimKey, false);
+                OnJumpFinish();
+            }
         }
     }
 
     public override void ClearState()
     {
+        ownerEntity.ClearAction(Player.ButtonActions.Henshin);
     }
 
     protected abstract void OnJumpFinish();
+
+    private void OnHenshin(bool isOn)
+    {
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.Henshin);
+        }
+    }
 }

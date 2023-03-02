@@ -34,8 +34,18 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float rotationSpeed;
     public float RotationSpeed => rotationSpeed;
 
+
     [SerializeField] private float stealthMoveMultiplier;
     public float StealthMoveMultiplier => stealthMoveMultiplier;
+
+
+    [SerializeField] private float sprintSpeedMultiplier;
+    public float SprintSpeedMultiplier => sprintSpeedMultiplier;
+
+    [SerializeField] private float sprintXAxisMultiplier;
+    public float SprintXAxisMultiplier => sprintXAxisMultiplier;
+
+
 
     [SerializeField] private float jumpPower;
     public float JumpPower => jumpPower;

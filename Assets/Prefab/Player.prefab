@@ -272,10 +272,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4c1b733cc4ba14ea342298dd0342b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 129
   normalModel: {fileID: 2766635649748681549}
   henshinModel: {fileID: 8310987857760778715}
   data:
   - {fileID: 11400000, guid: 719b5b9e0bbb3e44cb3542651d148ca7, type: 2}
+  - {fileID: 11400000, guid: 77dd2335bf8f7dd4fa25eabcd4f7e01e, type: 2}
 --- !u!1001 &2466876132149609546
 PrefabInstance:
   m_ObjectHideFlags: 0

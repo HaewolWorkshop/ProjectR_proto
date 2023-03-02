@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b36a0be75557a4d97757b813ebc0f4, type: 3}
   m_Name: Player Data Normal
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   rotationSpeed: 6
   stealthMoveMultiplier: 0.3
-  jumpPower: 100
+  sprintSpeedMultiplier: 2
+  sprintXAxisMultiplier: 0.1
+  jumpPower: 5

@@ -4,10 +4,8 @@ using UnityEngine;
 
 
 [FSMState((int) Player.States.Henshin)]
-public class PlayerHenshinState : PlayerMoveState
+public class PlayerHenshinState : FSMState<Player>
 {
-    protected override PlayerData data => ownerEntity.Data[1];
-    
     public PlayerHenshinState(IFSMEntity owner) : base(owner)
     {
     }
@@ -17,7 +15,10 @@ public class PlayerHenshinState : PlayerMoveState
         ownerEntity.NormalModel.gameObject.SetActive(false);
         ownerEntity.HenshinModel.gameObject.SetActive(true);
 
+        var stateInfo = ownerEntity.animator.GetCurrentAnimatorStateInfo(0);
+
         ownerEntity.animator.avatar = ownerEntity.HenshinModel.avatar;
+        ownerEntity.animator.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime);
 
         CameraManager.Instance.SetCamera(CameraType.Henshin3rdPerson);
 

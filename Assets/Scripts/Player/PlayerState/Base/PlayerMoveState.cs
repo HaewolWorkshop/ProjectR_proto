@@ -8,7 +8,7 @@ public abstract class PlayerMoveState : FSMState<Player>
     private readonly int InputXAnimParam = Animator.StringToHash("InputX");
     private readonly int InputYAnimParam = Animator.StringToHash("InputY");
 
-    private Vector2 moveInput;
+    protected Vector2 moveInput;
 
     protected abstract PlayerData data { get; }
     protected float speedMultiplier = 1;

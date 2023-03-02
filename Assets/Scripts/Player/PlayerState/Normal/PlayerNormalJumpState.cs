@@ -7,12 +7,14 @@ using UnityEngine;
 
 public class PlayerNormalJumpState : PlayerJumpState
 {
+    protected override PlayerData data => ownerEntity.Data[0];
+
     public PlayerNormalJumpState(IFSMEntity owner) : base(owner)
     {
     }
     
     protected override void OnJumpFinish()
     {
-        ownerEntity.ChangeState(Player.States.NormalMove);
+        ownerEntity.RevertToPreviousState();
     }
 }

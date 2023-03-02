@@ -5,6 +5,7 @@ using UnityEngine;
 [FSMState((int)Player.States.NormalStealth)]
 public class PlayerStealthState : PlayerMoveState
 {
+    private readonly int IsStealthAnimKey = Animator.StringToHash("IsStealth");
     protected override PlayerData data => ownerEntity.Data[0];
 
     public PlayerStealthState(IFSMEntity owner) : base(owner){}
@@ -12,23 +13,36 @@ public class PlayerStealthState : PlayerMoveState
     public override void InitializeState()
     {
         base.InitializeState();
+
+        ownerEntity.animator.SetBool(IsStealthAnimKey, true);
+
         speedMultiplier = data.StealthMoveMultiplier;
+
+        ownerEntity.SetAction(Player.ButtonActions.Stealth, OnStealth, true);
+        ownerEntity.SetAction(Player.ButtonActions.Jump, OnJump);
+    }
+    public override void ClearState()
+    {
+        base.ClearState();
+
+        ownerEntity.ClearAction(Player.ButtonActions.Stealth);
+        ownerEntity.ClearAction(Player.ButtonActions.Jump);
     }
 
-    public override void UpdateState()
+    private void OnStealth(bool isOn)
     {
-        base.UpdateState();
-
-        bool keyInput = ownerEntity.GetActionValue(Player.ButtonActions.Stealth);
-
-        if(!keyInput) {
-            ownerEntity.animator.SetBool("Stealth", false);
+        if(!isOn)
+        {
+            ownerEntity.animator.SetBool(IsStealthAnimKey, false);
             ownerEntity.ChangeState(Player.States.NormalMove);
         }
     }
 
-    public override void ClearState()
+    private void OnJump(bool isOn)
     {
-
+        if (isOn)
+        {
+            ownerEntity.ChangeState(Player.States.NormalJump);
+        }
     }
 }

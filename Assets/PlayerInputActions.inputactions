@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
+                    "name": "Sprint",
                     "type": "Button",
                     "id": "00abd393-90c5-40b3-bba4-951955077a6c",
                     "expectedControlType": "Button",
@@ -90,6 +90,15 @@
                     "name": "Skill2",
                     "type": "Button",
                     "id": "52f555da-96de-46d9-b566-c148ec58158c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Evade",
+                    "type": "Button",
+                    "id": "2d37202d-2a23-46b1-ac07-9b3d674deb14",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -236,7 +245,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dash",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -247,7 +256,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Dash",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -349,6 +358,17 @@
                     "action": "Henshin",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "2dc516ca-4ebf-489f-bdd2-12e0f5c73639",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Evade",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

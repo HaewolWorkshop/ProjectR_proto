@@ -74,6 +74,8 @@ public abstract class FSMPlayer<T> : MonoBehaviour where T : IFSMEntity
             previousState = currentState;
 
             currentState.ClearState();
+
+            Debug.Log($"{this.GetType()} : {currentState.GetType()} 상태 클리어");
         }
 
         currentState = newState;

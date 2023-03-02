@@ -12,7 +12,8 @@ public partial class Player
         Attack,
         Guard,
         Jump,
-        Dash,
+        Sprint,
+        Evade,
         Stealth,
         Skill1,
         Skill2,
@@ -65,6 +66,15 @@ public partial class Player
         buttonActions.Add(ButtonActions.Stealth, inputActions.Player.Stealth);
         inputActions.Player.Stealth.started += (x) => GetAction(ButtonActions.Stealth)?.Invoke(true);
         inputActions.Player.Stealth.canceled += (x) => GetAction(ButtonActions.Stealth)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Sprint, inputActions.Player.Sprint);
+        inputActions.Player.Sprint.started += (x) => GetAction(ButtonActions.Sprint)?.Invoke(true);
+        inputActions.Player.Sprint.canceled += (x) => GetAction(ButtonActions.Sprint)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Evade, inputActions.Player.Evade);
+        inputActions.Player.Evade.started += (x) => GetAction(ButtonActions.Evade)?.Invoke(true);
+        inputActions.Player.Evade.canceled += (x) => GetAction(ButtonActions.Evade)?.Invoke(false);
+
 
         // 임시
         Cursor.visible = false;
