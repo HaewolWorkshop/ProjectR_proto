@@ -24,6 +24,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
     private const float groundDist = 0.2f;
 
+    public Material henshinMat;// 임시
 
     public bool isGrounded { get; private set; }
 

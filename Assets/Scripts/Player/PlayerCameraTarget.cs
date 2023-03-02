@@ -7,7 +7,12 @@ public class PlayerCameraTarget : MonoBehaviour
     [SerializeField] private Vector3 targetDistances;
 
     private Vector3 velocity;
-    private float lastYPos;    
+    private float lastYPos;
+
+    private void Awake()
+    {
+        lastYPos = transform.position.y;
+    }
 
     private void Update()
     {
