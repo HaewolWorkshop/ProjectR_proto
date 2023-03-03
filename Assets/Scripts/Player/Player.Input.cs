@@ -8,12 +8,15 @@ public partial class Player
 {
     public enum ButtonActions // bool 값으로 입력받는 액션
     {
+        Henshin,
         Attack,
         Guard,
         Jump,
-        Dash,
+        Sprint,
+        Evade,
+        Stealth,
         Skill1,
-        Skill2
+        Skill2,
     }
 
     public enum ValueActions //float 값으로 입력받는 액션
@@ -23,6 +26,8 @@ public partial class Player
 
     // 벡터넘겨주는 액션은 따로 처리
     public UnityAction<Vector2> onMove { get; set; }
+    private InputVector2Damper moveInputDamper = new InputVector2Damper();
+
     public UnityAction<Vector2> onLook { get; set; }
 
 
@@ -49,19 +54,36 @@ public partial class Player
 
         moveInputAction = inputActions.Player.Move;
         lookInputAction = inputActions.Player.Look;
-
+        
+        buttonActions.Add(ButtonActions.Henshin, inputActions.Player.Henshin);
+        inputActions.Player.Henshin.started += (x) => GetAction(ButtonActions.Henshin)?.Invoke(true);
+        inputActions.Player.Henshin.canceled += (x) => GetAction(ButtonActions.Henshin)?.Invoke(false);
+        
         buttonActions.Add(ButtonActions.Jump, inputActions.Player.Jump);
         inputActions.Player.Jump.started += (x) => GetAction(ButtonActions.Jump)?.Invoke(true);
         inputActions.Player.Jump.canceled += (x) => GetAction(ButtonActions.Jump)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Stealth, inputActions.Player.Stealth);
+        inputActions.Player.Stealth.started += (x) => GetAction(ButtonActions.Stealth)?.Invoke(true);
+        inputActions.Player.Stealth.canceled += (x) => GetAction(ButtonActions.Stealth)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Sprint, inputActions.Player.Sprint);
+        inputActions.Player.Sprint.started += (x) => GetAction(ButtonActions.Sprint)?.Invoke(true);
+        inputActions.Player.Sprint.canceled += (x) => GetAction(ButtonActions.Sprint)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Evade, inputActions.Player.Evade);
+        inputActions.Player.Evade.started += (x) => GetAction(ButtonActions.Evade)?.Invoke(true);
+        inputActions.Player.Evade.canceled += (x) => GetAction(ButtonActions.Evade)?.Invoke(false);
+
 
         // 임시
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    protected void UpdateInputs()
+    private void UpdateInputs()
     {
-        var moveInput = moveInputAction.ReadValue<Vector2>();
+        var moveInput = moveInputDamper.getDampedValue(moveInputAction.ReadValue<Vector2>(), Time.deltaTime);
         var lookInput = lookInputAction.ReadValue<Vector2>();
 
         onMove?.Invoke(moveInput);
@@ -96,8 +118,7 @@ public partial class Player
         }
         return null;
     }
-
-
+    
     public bool GetActionValue(ButtonActions type)
     {
         if (buttonActions.TryGetValue(type, out var input))
@@ -113,11 +134,11 @@ public partial class Player
         {
             return input.ReadValue<float>();
         }
+
         return 0;
     }
-
-
-    public void SetAction(ButtonActions type, UnityAction<bool> action, bool update = true)
+    
+    public void SetAction(ButtonActions type, UnityAction<bool> action, bool update = false)
     {
         if (!buttonEvents.ContainsKey(type))
         {
@@ -140,33 +161,5 @@ public partial class Player
         {
             buttonEvents.Remove(type);
         }
-    }
-
-
-    public void HandleCameraRotation(Vector2 look, bool lockYaw)
-    {
-        if (Data.InverseY)
-        {
-            look.y *= -1;
-        }
-
-        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.y * Data.LookSpeed * Time.deltaTime, Vector3.right);
-        cameraLookAtTarget.rotation *= Quaternion.AngleAxis(look.x * Data.LookSpeed * Time.deltaTime, Vector3.up);
-
-        var angles = cameraLookAtTarget.localEulerAngles;
-
-        angles.x = Mathf.Clamp(angles.x > 180 ? angles.x - 360 : angles.x, Data.CameraMinYAngle, Data.CameraMaxYAngle);
-        angles.z = 0;
-
-
-        if (lockYaw)
-        {
-            var target = Quaternion.Euler(0, cameraLookAtTarget.rotation.eulerAngles.y, 0);
-            transform.rotation = target; Quaternion.Slerp(transform.rotation, target, Data.RotationSpeed * Time.deltaTime);
-
-            angles.y = 0;
-        }
-
-        cameraLookAtTarget.localEulerAngles = angles;
     }
 }

@@ -10,7 +10,7 @@ public static class VectorExtension
     }
 
 
-    public static Vector3 ConvertToTransformSpace(this Vector3 vector, Transform target)
+    public static Vector3 RotateToTransformSpace(this Vector3 vector, Transform target)
     {
         var forward = target.forward;
         var right = target.right;
