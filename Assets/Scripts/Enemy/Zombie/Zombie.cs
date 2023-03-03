@@ -17,6 +17,8 @@ public class Zombie : FSMEnemy<Zombie>, IFSMEntity
 
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 100.0f;
+    public float sightAngle = 30f;
+    public float sightRange = 10f;
     public float attackRange = 3f;
 
     public Player player { get; private set; } = null;
@@ -87,7 +89,18 @@ public class Zombie : FSMEnemy<Zombie>, IFSMEntity
 
     private void OnDrawGizmosSelected()
     {
+        var t = transform;
+        var position = t.position;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(position, attackRange);
+
+        var sightHalfAngleInRadian = sightAngle * Mathf.Deg2Rad * 0.5f;
+        var forward = t.forward;
+        Gizmos.color = Color.cyan;
+        var sightLeft = forward.RotatedAroundY(-sightHalfAngleInRadian) * sightRange;
+        var sightRight = forward.RotatedAroundY(sightHalfAngleInRadian) * sightRange;
+        Gizmos.DrawLine(position, position + sightLeft);
+        Gizmos.DrawLine(position, position + sightRight);
+
     }
 }

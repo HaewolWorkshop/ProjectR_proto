@@ -595,6 +595,16 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4449918847547417489, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
+        type: 3}
+      propertyPath: sightAngle
+      value: 63.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449918847547417489, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
+        type: 3}
+      propertyPath: sightRange
+      value: 7.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5091242709008108106, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
         type: 3}
       propertyPath: m_Name
