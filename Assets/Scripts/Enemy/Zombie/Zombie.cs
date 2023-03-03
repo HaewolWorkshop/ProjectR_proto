@@ -222,11 +222,6 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
     protected override void Update()
     {
         base.Update();
-
-        if (Keyboard.current[Key.Tab].wasPressedThisFrame)
-        {
-            Damage(2f);
-        }
     }
 
     public void OnDead()
