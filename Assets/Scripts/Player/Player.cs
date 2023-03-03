@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
     public enum States : int
@@ -47,8 +47,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     [SerializeField] private float stepHeight = .0f;
     [SerializeField] private float stepSmooth = .0f;
 
-    [SerializeField] private GameObject hitBox = null;
-
+    [SerializeField] private HitBox hitBox = null;
     // 임시
     [SerializeField] private PlayerData[] data;
     public PlayerData[] Data => data;
@@ -59,6 +58,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         animator = GetComponent<Animator>();
 
         stepNormalRayUpper.transform.position = new Vector3(stepNormalRayUpper.transform.position.x, stepHeight, stepNormalRayUpper.transform.position.z);
+        hitBox.SetPlayer(this);
         
         InitInputs();
         
@@ -112,6 +112,6 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
 
     public void SetHitBox(bool isOn)
     {
-        hitBox.SetActive(isOn);
+        hitBox.gameObject.SetActive(isOn);
     }
 }
