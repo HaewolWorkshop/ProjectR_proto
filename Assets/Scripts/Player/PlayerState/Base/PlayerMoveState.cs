@@ -13,6 +13,8 @@ public abstract class PlayerMoveState : FSMState<Player>
     protected abstract PlayerData data { get; }
     protected float speedMultiplier = 1;
 
+    
+
     public PlayerMoveState(IFSMEntity owner) : base(owner)
     {
     }
@@ -45,10 +47,29 @@ public abstract class PlayerMoveState : FSMState<Player>
                        data.MoveSpeed * speedMultiplier;
         velocity.y = ownerEntity.rigidbody.velocity.y;
         ownerEntity.rigidbody.velocity = velocity;
+
+        StepClimb();
     }
 
 
     public override void ClearState()
     {
+    }
+
+    public void StepClimb()
+    {
+        if (Physics.Raycast(ownerEntity.GetLowerRay().transform.position, 
+            ownerEntity.GetTransform().TransformDirection(Vector3.forward), 
+            out var hitLower, 0.1f))
+        {
+
+            if (Physics.Raycast(ownerEntity.GetUpperRay().transform.position,
+                ownerEntity.GetTransform().TransformDirection(Vector3.forward),
+                out var hitUpper, 0.3f))
+            {
+                ownerEntity.rigidbody.position -= new Vector3(0f, -ownerEntity.GetStepSmooth(), 0f);
+            }
+        }
+
     }
 }

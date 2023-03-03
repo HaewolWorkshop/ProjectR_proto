@@ -42,6 +42,12 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     [SerializeField] private Animator henshinModel;
     public Animator HenshinModel => henshinModel;
 
+
+    [SerializeField] private GameObject stepNormalRayUpper;
+    [SerializeField] private GameObject stepNormalRayLower;
+    [SerializeField] private float stepHeight = .0f;
+    [SerializeField] private float stepSmooth = .0f;
+
     // 임시
     [SerializeField] private PlayerData[] data;
     public PlayerData[] Data => data;
@@ -50,6 +56,8 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        stepNormalRayUpper.transform.position = new Vector3(stepNormalRayUpper.transform.position.x, stepHeight, stepNormalRayUpper.transform.position.z);
         
         InitInputs();
         
@@ -74,5 +82,30 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     private void CheckGround()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out var hit, groundDist, groundLayer);
+    }
+
+    public GameObject GetUpperRay()
+    {
+        return stepNormalRayUpper;
+    }
+
+    public GameObject GetLowerRay()
+    {
+        return stepNormalRayLower;
+    }
+
+    public float GetStepHeight()
+    {
+        return stepHeight;
+    }
+
+    public float GetStepSmooth()
+    {
+        return stepSmooth;
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
     }
 }
