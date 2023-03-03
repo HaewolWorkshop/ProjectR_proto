@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[FSMState((int)Zombie.ZombieStates.Chase)]
 public class ZombieChaseState : FSMState<Zombie>
 {
 
@@ -9,7 +10,6 @@ public class ZombieChaseState : FSMState<Zombie>
     
     public override void InitializeState()
     {
-        
     }
 
     public override void UpdateState()
@@ -36,6 +36,5 @@ public class ZombieChaseState : FSMState<Zombie>
 
     public override void ClearState()
     {
-        
     }
 }

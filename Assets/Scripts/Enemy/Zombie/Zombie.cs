@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Zombie : FSMEnemy<Zombie>, IFSMEntity
+public class Zombie : FSMPlayer<Zombie>, IFSMEntity
 {
     public enum ZombieStates : int
     {
@@ -29,19 +29,14 @@ public class Zombie : FSMEnemy<Zombie>, IFSMEntity
     public static readonly int Attack = Animator.StringToHash("Attack");
     public static readonly int Death = Animator.StringToHash("Death");
 
-    protected override void Setup()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        
-        states = new FSMState<Zombie>[(int)ZombieStates.Max];
-        states[(int) ZombieStates.Idle] = new ZombieIdleState(this);
-        states[(int) ZombieStates.Chase] = new ZombieChaseState(this);
-        states[(int) ZombieStates.Attack] = new ZombieAttackState(this);
 
         player = FindObjectOfType<Player>(); // TODO
     
-        ChangeState(ZombieStates.Chase);
+        SetUp(ZombieStates.Chase);
     }
 
     private Vector3 moveTarget;

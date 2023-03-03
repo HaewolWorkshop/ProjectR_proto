@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[FSMState((int)Zombie.ZombieStates.Idle)]
 public class ZombieIdleState : FSMState<Zombie>
 {
 
@@ -9,12 +10,10 @@ public class ZombieIdleState : FSMState<Zombie>
     
     public override void InitializeState()
     {
-        
     }
 
     public override void UpdateState()
     {
-        
     }
 
     public override void FixedUpdateState()
@@ -23,6 +22,5 @@ public class ZombieIdleState : FSMState<Zombie>
 
     public override void ClearState()
     {
-        
     }
 }
