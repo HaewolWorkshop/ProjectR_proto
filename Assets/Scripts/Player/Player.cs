@@ -20,6 +20,9 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         HenshinMove,
         HenshinJump,
         HenshinGuard,
+        HenshinAttackIdle,
+        HenshinFirstAttack,
+        HenshinSecondAttack
     }
 
     private const float groundDist = 0.2f;

@@ -19,13 +19,24 @@ public class PlayerHenshinMoveState : PlayerMoveState
         ownerEntity.SetAction(Player.ButtonActions.Jump, OnJump);
         
         ownerEntity.SetAction(Player.ButtonActions.Henshin, OnHenshin);
+
+        ownerEntity.SetAction(Player.ButtonActions.Attack, OnAttack);
+    }
+
+    private void OnAttack(bool isOn)
+    {
+        if(isOn)
+        {
+        }
     }
 
     private void OnJump(bool isOn)
     {
         if (isOn)
         {
-            ownerEntity.ChangeState(Player.States.NormalJump);
+            ownerEntity.ChangeState(Player.States.HenshinAttackIdle);
+
+            //ownerEntity.ChangeState(Player.States.NormalJump);
         }
     }
 
