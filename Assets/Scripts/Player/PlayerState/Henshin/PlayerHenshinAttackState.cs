@@ -10,6 +10,8 @@ public class PlayerHenshinAttackState : FSMState<Player>
     public override void InitializeState()
     {
         ownerEntity.SetAction(Player.ButtonActions.Sprint, OnMove);
+        ownerEntity.SetAction(Player.ButtonActions.Attack, OnAttack);
+
 
         if (!ownerEntity.animator.GetBool("isAttacking"))
         {
@@ -44,6 +46,15 @@ public class PlayerHenshinAttackState : FSMState<Player>
     private void OnAttackMotion()
     {
         ownerEntity.ChangeState(Player.States.HenshinFirstAttack);
+    }
+
+    private void OnAttack(bool isOn)
+    {
+        if (isOn)
+        {
+            ownerEntity.animator.SetBool("isAttacking", false);
+            ownerEntity.ChangeState(Player.States.HenshinAttackIdle);
+        }
     }
 
 

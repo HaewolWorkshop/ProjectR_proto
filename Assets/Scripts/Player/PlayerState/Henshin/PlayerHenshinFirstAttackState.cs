@@ -16,6 +16,7 @@ public class PlayerHenshinFirstAttackState : FSMState<Player>
     {
         ownerEntity.SetHitBox(true);
         ownerEntity.animator.SetInteger("isAttackMotion", AttackAnimKey);
+
     }
 
     public override void UpdateState()
@@ -32,6 +33,7 @@ public class PlayerHenshinFirstAttackState : FSMState<Player>
     }
     public override void ClearState()
     {
+        Debug.Log("CLEAR");
         ownerEntity.SetHitBox(false);
         ownerEntity.animator.SetInteger("isAttackMotion", 0);
     }
