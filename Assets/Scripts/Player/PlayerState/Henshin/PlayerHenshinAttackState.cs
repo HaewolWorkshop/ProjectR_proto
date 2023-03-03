@@ -38,18 +38,12 @@ public class PlayerHenshinAttackState : FSMState<Player>
         {
             ownerEntity.animator.SetBool("isAttacking", false);
             ownerEntity.ChangeState(Player.States.HenshinMove);
-            Debug.Log("Changed Move");
         }
     }
 
     private void OnAttackMotion()
     {
-        int rand = Random.Range(0, 2);
-
-        if (rand == 0)
-            ownerEntity.ChangeState(Player.States.HenshinSecondAttack);
-        else
-            ownerEntity.ChangeState(Player.States.HenshinFirstAttack);
+        ownerEntity.ChangeState(Player.States.HenshinFirstAttack);
     }
 
 
