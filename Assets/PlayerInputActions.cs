@@ -46,6 +46,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Henshin"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2e10616-6993-4a75-8293-076792a231d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d9d357b-e2fc-4268-a07a-b1c370dc7420"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""23cec292-db95-431a-82f0-f70ec6ecb0fc"",
@@ -73,7 +91,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
+                    ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""00abd393-90c5-40b3-bba4-951955077a6c"",
                     ""expectedControlType"": ""Button"",
@@ -94,6 +112,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Skill2"",
                     ""type"": ""Button"",
                     ""id"": ""52f555da-96de-46d9-b566-c148ec58158c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Evade"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d37202d-2a23-46b1-ac07-9b3d674deb14"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -240,7 +267,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -251,7 +278,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dash"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""793b8b03-127a-4836-be64-f5a5ceedc693"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -287,6 +325,72 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""330e3df3-2668-43d0-9ac4-e4fd17e45fc4"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ede325f-da76-4617-8a48-0ea9fa498b03"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Sticks"",
+                    ""id"": ""0686a046-f941-4eb6-a1ec-882d204170b9"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""04c2de46-8e35-46bf-a8be-5607a04e19bf"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a8dd84dd-84f8-4d50-8a6a-d3c5fb30f708"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Henshin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2dc516ca-4ebf-489f-bdd2-12e0f5c73639"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Evade"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -297,12 +401,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Henshin = m_Player.FindAction("Henshin", throwIfNotFound: true);
+        m_Player_Stealth = m_Player.FindAction("Stealth", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Skill1 = m_Player.FindAction("Skill1", throwIfNotFound: true);
         m_Player_Skill2 = m_Player.FindAction("Skill2", throwIfNotFound: true);
+        m_Player_Evade = m_Player.FindAction("Evade", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -364,24 +471,30 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Henshin;
+    private readonly InputAction m_Player_Stealth;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Guard;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Skill1;
     private readonly InputAction m_Player_Skill2;
+    private readonly InputAction m_Player_Evade;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Henshin => m_Wrapper.m_Player_Henshin;
+        public InputAction @Stealth => m_Wrapper.m_Player_Stealth;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Guard => m_Wrapper.m_Player_Guard;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Skill1 => m_Wrapper.m_Player_Skill1;
         public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
+        public InputAction @Evade => m_Wrapper.m_Player_Evade;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -397,6 +510,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Henshin.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
+                @Henshin.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
+                @Henshin.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHenshin;
+                @Stealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
+                @Stealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
+                @Stealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStealth;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -406,15 +525,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Sprint.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSprint;
                 @Skill1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
                 @Skill1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
                 @Skill1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
                 @Skill2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill2;
                 @Skill2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill2;
                 @Skill2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill2;
+                @Evade.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvade;
+                @Evade.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvade;
+                @Evade.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEvade;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -425,6 +547,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Henshin.started += instance.OnHenshin;
+                @Henshin.performed += instance.OnHenshin;
+                @Henshin.canceled += instance.OnHenshin;
+                @Stealth.started += instance.OnStealth;
+                @Stealth.performed += instance.OnStealth;
+                @Stealth.canceled += instance.OnStealth;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -434,15 +562,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
                 @Skill1.started += instance.OnSkill1;
                 @Skill1.performed += instance.OnSkill1;
                 @Skill1.canceled += instance.OnSkill1;
                 @Skill2.started += instance.OnSkill2;
                 @Skill2.performed += instance.OnSkill2;
                 @Skill2.canceled += instance.OnSkill2;
+                @Evade.started += instance.OnEvade;
+                @Evade.performed += instance.OnEvade;
+                @Evade.canceled += instance.OnEvade;
             }
         }
     }
@@ -451,11 +582,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnHenshin(InputAction.CallbackContext context);
+        void OnStealth(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnSkill1(InputAction.CallbackContext context);
         void OnSkill2(InputAction.CallbackContext context);
+        void OnEvade(InputAction.CallbackContext context);
     }
 }

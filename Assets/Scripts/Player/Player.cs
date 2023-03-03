@@ -4,50 +4,56 @@ using UnityEngine;
 
 public partial class Player : FSMPlayer<Player>, IFSMEntity
 {
-    public enum PlayerStates : int
+    public enum States : int
     {
-        Move = 0,
-        Dash,
-        Guard,
-        Jump,
-        Fall,
-        Attack,
-        Skill,
-
-        Max
+        Global,
+        
+        NormalMove,
+        NormalSprint,
+        NormalStealth,
+        NormalJump,
+        NormalFall,
+        
+        Disengage,
+        Henshin,
+        
+        HenshinMove,
+        HenshinJump,
+        HenshinGuard,
+        HenshinAttackIdle,
+        HenshinFirstAttack,
+        HenshinSecondAttack
     }
 
+    private const float groundDist = 0.2f;
+
+    public Material henshinMat;// 임시
+
+    public bool isGrounded { get; private set; }
 
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
 
+    [SerializeField] private LayerMask groundLayer;
 
-    [SerializeField] private Transform cameraLookAtTarget;
-    public Transform CameraLookAtTarget => cameraLookAtTarget;
+    [SerializeField] private Animator normalModel;
+    public Animator NormalModel => normalModel;
+    
+    [SerializeField] private Animator henshinModel;
+    public Animator HenshinModel => henshinModel;
 
-    [SerializeField] private Transform cameraFollowTarget;
-    public Transform CameraFollowTarget => cameraFollowTarget;
-
-
+    // 임시
     [SerializeField] private PlayerData[] data;
-    public PlayerData Data => data[0];
+    public PlayerData[] Data => data;
 
-    protected override void Setup()
+    protected void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        states = new FSMState<Player>[(int)PlayerStates.Max];
-
-        states[(int)PlayerStates.Move] = new PlayerMoveState(this);
-
-        ChangeState(PlayerStates.Move);
-    }
-
-    protected override void Awake()
-    {
+        
         InitInputs();
-        Setup();
+        
+        SetUp(States.NormalMove);
     }
 
     protected override void Update()
@@ -55,5 +61,18 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         UpdateInputs();
 
         base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        CheckGround();
+
+        base.FixedUpdate();
+    }
+
+
+    private void CheckGround()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out var hit, groundDist, groundLayer);
     }
 }
