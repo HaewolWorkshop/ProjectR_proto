@@ -75,6 +75,10 @@ public partial class Player
         inputActions.Player.Evade.started += (x) => GetAction(ButtonActions.Evade)?.Invoke(true);
         inputActions.Player.Evade.canceled += (x) => GetAction(ButtonActions.Evade)?.Invoke(false);
 
+        buttonActions.Add(ButtonActions.Attack, inputActions.Player.Attack);
+        inputActions.Player.Attack.started += (x) => GetAction(ButtonActions.Attack)?.Invoke(true);
+        inputActions.Player.Attack.canceled += (x) => GetAction(ButtonActions.Attack)?.Invoke(false);
+
 
         // 임시
         Cursor.visible = false;

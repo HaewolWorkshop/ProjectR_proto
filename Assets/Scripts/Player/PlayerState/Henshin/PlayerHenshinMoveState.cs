@@ -27,6 +27,7 @@ public class PlayerHenshinMoveState : PlayerMoveState
     {
         if(isOn)
         {
+            ownerEntity.ChangeState(Player.States.HenshinAttackIdle);
         }
     }
 
@@ -34,9 +35,7 @@ public class PlayerHenshinMoveState : PlayerMoveState
     {
         if (isOn)
         {
-            ownerEntity.ChangeState(Player.States.HenshinAttackIdle);
-
-            //ownerEntity.ChangeState(Player.States.NormalJump);
+            ownerEntity.ChangeState(Player.States.NormalJump);
         }
     }
 
