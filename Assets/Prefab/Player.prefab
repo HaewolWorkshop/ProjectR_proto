@@ -94,6 +94,68 @@ MonoBehaviour:
   player: {fileID: 2951507103481593334}
   smoothTime: 100
   targetDistances: {x: 0.02, y: 0.1, z: 0.1}
+--- !u!1 &4424787054827505161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7843561341848015750}
+  m_Layer: 6
+  m_Name: stepRayUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7843561341848015750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424787054827505161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8107953377399150903}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4593725145186591889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8156557183371955784}
+  m_Layer: 6
+  m_Name: stepRayLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8156557183371955784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593725145186591889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8107953377399150903}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4991003768764063352
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,11 +334,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4c1b733cc4ba14ea342298dd0342b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  henshinMat: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 129
   normalModel: {fileID: 2766635649748681549}
   henshinModel: {fileID: 8310987857760778715}
+  stepNormalRayUpper: {fileID: 4424787054827505161}
+  stepNormalRayLower: {fileID: 4593725145186591889}
+  stepHeight: 0.15
+  stepSmooth: 0.1
   data:
   - {fileID: 11400000, guid: 719b5b9e0bbb3e44cb3542651d148ca7, type: 2}
   - {fileID: 11400000, guid: 77dd2335bf8f7dd4fa25eabcd4f7e01e, type: 2}
