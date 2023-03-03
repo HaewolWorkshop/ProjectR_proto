@@ -20,7 +20,8 @@ public class PlayerHenshinFirstAttackState : FSMState<Player>
 
     public override void UpdateState()
     {
-        if (ownerEntity.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > AnimEndTime)
+        if (ownerEntity.animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1") &&
+            ownerEntity.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > AnimEndTime)
         {
             ownerEntity.RevertToPreviousState();
         }
