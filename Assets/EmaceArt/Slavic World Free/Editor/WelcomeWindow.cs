@@ -23,7 +23,7 @@ public class WelcomeWindow : EditorWindow
         if (EditorApplication.isPlayingOrWillChangePlaymode)
             return;
 
-        OpenWindow();
+        // OpenWindow();
     }
 
     [MenuItem("Tools/EmaceArt/Welcome Window")]
