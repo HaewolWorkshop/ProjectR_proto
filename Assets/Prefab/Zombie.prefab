@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4449918847547417489}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   wanderSpotRange: 1
   wanderType: 0
   currentWanderingTargetSpot: -1
+  canDamage: 1
 --- !u!1 &5091242709008108108
 GameObject:
   m_ObjectHideFlags: 0

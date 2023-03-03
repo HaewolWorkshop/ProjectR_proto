@@ -135,11 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
-    - target: {fileID: 5091242709008108106, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 5091242709008406442, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
         type: 3}
       propertyPath: m_RootOrder
@@ -465,18 +460,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!4 &554955453 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4290160299358632834, guid: daa2263708a971b4b8c200aed308e30b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2951507103481593331}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &566915172 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8647049900821336457, guid: daa2263708a971b4b8c200aed308e30b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2951507103481593331}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &566938261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,64 +1052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &984348623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 984348624}
-  - component: {fileID: 984348625}
-  - component: {fileID: 984348626}
-  m_Layer: 0
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &984348624
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984348623}
-  m_LocalRotation: {x: -0.0061376723, y: 0.07068998, z: -0.07352699, w: 0.9947658}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 566915172}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &984348625
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984348623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0.09, z: 0}
---- !u!114 &984348626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984348623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef667b51a42f40e4bba9d6ac7b7e3d52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1301369653
 GameObject:
   m_ObjectHideFlags: 3
@@ -1205,37 +1130,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2081391510}
---- !u!1 &1346013823
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1346013824}
-  m_Layer: 0
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1346013824
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346013823}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 554955453}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451729171
 GameObject:
   m_ObjectHideFlags: 3
@@ -2441,21 +2335,6 @@ PrefabInstance:
     - target: {fileID: 1496524849210142897, guid: daa2263708a971b4b8c200aed308e30b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2951507103481593334, guid: daa2263708a971b4b8c200aed308e30b,
-        type: 3}
-      propertyPath: hitBox
-      value: 
-      objectReference: {fileID: 984348623}
-    - target: {fileID: 2951507103481593334, guid: daa2263708a971b4b8c200aed308e30b,
-        type: 3}
-      propertyPath: henshinMat
-      value: 
-      objectReference: {fileID: 2100000, guid: b6a723bad0e2280488e41ffe682e7658, type: 2}
-    - target: {fileID: 3385989025891875099, guid: daa2263708a971b4b8c200aed308e30b,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8946478089969266221, guid: daa2263708a971b4b8c200aed308e30b,
