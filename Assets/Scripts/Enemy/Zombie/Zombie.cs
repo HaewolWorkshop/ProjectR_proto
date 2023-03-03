@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -227,5 +227,10 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
         {
             Damage(2f);
         }
+    }
+
+    public void OnDead()
+    {
+        Destroy(this.gameObject, 2f);
     }
 }

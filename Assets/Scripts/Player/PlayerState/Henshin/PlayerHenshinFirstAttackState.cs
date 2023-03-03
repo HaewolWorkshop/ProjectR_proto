@@ -14,13 +14,12 @@ public class PlayerHenshinFirstAttackState : FSMState<Player>
 
     public override void InitializeState()
     {
+        ownerEntity.SetHitBox(true);
         ownerEntity.animator.SetInteger("isAttackMotion", AttackAnimKey);
     }
 
     public override void UpdateState()
     {
-        Debug.Log(ownerEntity.animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-
         if (ownerEntity.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > AnimEndTime)
         {
             ownerEntity.RevertToPreviousState();
@@ -32,6 +31,7 @@ public class PlayerHenshinFirstAttackState : FSMState<Player>
     }
     public override void ClearState()
     {
+        ownerEntity.SetHitBox(false);
         ownerEntity.animator.SetInteger("isAttackMotion", 0);
     }
 

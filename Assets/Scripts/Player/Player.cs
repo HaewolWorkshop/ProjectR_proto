@@ -47,6 +47,8 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     [SerializeField] private float stepHeight = .0f;
     [SerializeField] private float stepSmooth = .0f;
 
+    [SerializeField] private GameObject hitBox = null;
+
     // 임시
     [SerializeField] private PlayerData[] data;
     public PlayerData[] Data => data;
@@ -106,5 +108,10 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     public Transform GetTransform()
     {
         return this.transform;
+    }
+
+    public void SetHitBox(bool isOn)
+    {
+        hitBox.SetActive(isOn);
     }
 }

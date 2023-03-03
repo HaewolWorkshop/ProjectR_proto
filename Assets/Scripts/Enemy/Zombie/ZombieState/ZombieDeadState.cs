@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [FSMState((int)Zombie.ZombieStates.Dead)]
 public class ZombieDeadState : FSMState<Zombie>
@@ -13,6 +13,8 @@ public class ZombieDeadState : FSMState<Zombie>
         ownerEntity.canDamage = false;
         ownerEntity.StopMove();
         ownerEntity.animator.SetTrigger(Zombie.DeathTrigger);
+        ownerEntity.OnDead();
+        ownerEntity.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public override void UpdateState()
