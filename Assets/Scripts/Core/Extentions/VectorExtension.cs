@@ -53,4 +53,13 @@ public static class VectorExtension
         newVector.RotateAroundY(angleInRadian);
         return newVector;
     }
+
+    public static float Distance(this Vector3 v, Vector3 other)
+    {
+        return (v - other).magnitude;
+    }
+    public static float DistanceSquared(this Vector3 v, Vector3 other)
+    {
+        return (v - other).sqrMagnitude;
+    }
 }

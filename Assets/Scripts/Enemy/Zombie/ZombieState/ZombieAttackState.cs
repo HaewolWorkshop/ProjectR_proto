@@ -21,7 +21,7 @@ public class ZombieAttackState : FSMState<Zombie>
     public override void InitializeState()
     {
         ownerEntity.StopMove();
-        ownerEntity.animator.SetTrigger(Zombie.Attack);
+        ownerEntity.animator.SetTrigger(Zombie.AttackTrigger);
     }
 
     public override void UpdateState()
