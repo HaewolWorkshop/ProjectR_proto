@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Zombie : FSMPlayer<Zombie>, IFSMEntity
@@ -12,6 +13,7 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
         Idle = 0,
         Chase,
         Attack,
+        Hit,
         Dead,
         
         Max
@@ -48,6 +50,7 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
     public static readonly int IsMoving = Animator.StringToHash("IsMoving");
     public static readonly int AttackTrigger = Animator.StringToHash("Attack");
     public static readonly int DeathTrigger = Animator.StringToHash("Death");
+    public static readonly int HitTrigger = Animator.StringToHash("Hit");
 
     private void Awake()
     {
@@ -196,14 +199,33 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
     }
 #endif
 
+    public bool canDamage = true;
     public void Damage(float amount)
     {
+        if (!canDamage)
+        {
+            return;
+        }
         hp -= amount;
 
         if (hp <= 0)
         {
             hp = 0f;
             ChangeState(ZombieStates.Dead);
+        }
+        else
+        {
+            ChangeState(ZombieStates.Hit);
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Keyboard.current[Key.Tab].wasPressedThisFrame)
+        {
+            Damage(2f);
         }
     }
 }

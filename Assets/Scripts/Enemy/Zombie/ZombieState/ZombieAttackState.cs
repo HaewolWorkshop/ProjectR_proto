@@ -13,7 +13,10 @@ public class ZombieAttackState : FSMState<Zombie>
         };
         ownerEntity.OnAnimationEnd += (type) =>
         {
-            Debug.Log($"{ownerEntity.name} {type} 애니메이션 종료");
+            if (type != "Attack")
+            {
+                return;
+            }
             ownerEntity.ChangeState(Zombie.ZombieStates.Chase);
         };
     }   

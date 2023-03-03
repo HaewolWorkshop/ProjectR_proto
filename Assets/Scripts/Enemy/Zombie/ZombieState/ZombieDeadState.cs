@@ -10,6 +10,8 @@ public class ZombieDeadState : FSMState<Zombie>
     
     public override void InitializeState()
     {
+        ownerEntity.canDamage = false;
+        ownerEntity.StopMove();
         ownerEntity.animator.SetTrigger(Zombie.DeathTrigger);
     }
 
