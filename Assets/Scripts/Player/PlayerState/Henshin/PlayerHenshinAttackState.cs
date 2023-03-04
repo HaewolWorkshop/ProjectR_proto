@@ -7,10 +7,13 @@ public class PlayerHenshinAttackState : FSMState<Player>
 {
     public PlayerHenshinAttackState(IFSMEntity owner) : base(owner) { }
 
+    private Vector2 moveInput;
+
     public override void InitializeState()
     {
-        ownerEntity.SetAction(Player.ButtonActions.Sprint, OnMove);
         ownerEntity.SetAction(Player.ButtonActions.Attack, OnAttack);
+
+        ownerEntity.onMove = (x) => moveInput = x;
 
 
         if (!ownerEntity.animator.GetBool("isAttacking"))
@@ -22,7 +25,11 @@ public class PlayerHenshinAttackState : FSMState<Player>
 
     public override void UpdateState()
     {
-
+        if(moveInput != Vector2.zero)
+        {
+            ownerEntity.animator.SetBool("isAttacking", false);
+            ownerEntity.ChangeState(Player.States.HenshinMove);
+        }
     }
 
     public override void FixedUpdateState()
@@ -32,15 +39,7 @@ public class PlayerHenshinAttackState : FSMState<Player>
 
     public override void ClearState()
     {
-    }
-
-    private void OnMove(bool isOn)
-    {
-        if(isOn)
-        {
-            ownerEntity.animator.SetBool("isAttacking", false);
-            ownerEntity.ChangeState(Player.States.HenshinMove);
-        }
+        ownerEntity.ClearAction(Player.ButtonActions.Attack);
     }
 
     private void OnAttackMotion()

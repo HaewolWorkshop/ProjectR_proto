@@ -10,6 +10,7 @@ public partial class Player
     {
         Henshin,
         Attack,
+        Grab,
         Guard,
         Jump,
         Sprint,
@@ -79,6 +80,10 @@ public partial class Player
         inputActions.Player.Attack.started += (x) => GetAction(ButtonActions.Attack)?.Invoke(true);
         inputActions.Player.Attack.canceled += (x) => GetAction(ButtonActions.Attack)?.Invoke(false);
 
+
+        buttonActions.Add(ButtonActions.Grab, inputActions.Player.Grab);
+        inputActions.Player.Grab.started += (x) => GetAction(ButtonActions.Grab)?.Invoke(true);
+        inputActions.Player.Grab.canceled += (x) => GetAction(ButtonActions.Grab)?.Invoke(false);
 
         // 임시
         Cursor.visible = false;

@@ -18,13 +18,14 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         Henshin,
         
         HenshinMove,
+        HenshinGrab,
         HenshinJump,
         HenshinGuard,
         HenshinAttackIdle,
         HenshinFirstAttack
     }
 
-    private const float groundDist = 0.2f;
+    private const float groundDist = 0.3f;
 
     public Material henshinMat;// 임시
 
@@ -34,12 +35,19 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     public Animator animator { get; private set; }
 
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask grabLayer;
+    public LayerMask GrabLayer => grabLayer;
 
     [SerializeField] private Animator normalModel;
     public Animator NormalModel => normalModel;
     
     [SerializeField] private Animator henshinModel;
     public Animator HenshinModel => henshinModel;
+
+
+    [SerializeField] private Transform grabPoint;
+    public Transform GrabPoint => grabPoint;
+
 
 
     [SerializeField] private GameObject stepNormalRayUpper;
@@ -75,14 +83,13 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     protected override void FixedUpdate()
     {
         CheckGround();
-
         base.FixedUpdate();
     }
 
 
     private void CheckGround()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, out var hit, groundDist, groundLayer);
+        isGrounded = Physics.OverlapSphere(transform.position, groundDist, groundLayer).Length != 0;
     }
 
     public GameObject GetUpperRay()

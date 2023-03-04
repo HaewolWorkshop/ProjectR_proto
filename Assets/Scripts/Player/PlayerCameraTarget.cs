@@ -4,6 +4,8 @@ public class PlayerCameraTarget : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private float smoothTime;
+    [SerializeField] private float maxDownDist;
+    [SerializeField] private float maxUpDist;
     [SerializeField] private Vector3 targetDistances;
 
     private Vector3 velocity;
@@ -24,7 +26,10 @@ public class PlayerCameraTarget : MonoBehaviour
 
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, target, ref velocity, smoothTime * Time.deltaTime);
 
-        if (!player.isGrounded)
+        var dist = transform.parent.position.y - transform.position.y;
+        var isOut = Mathf.Abs(dist) > (dist < 0 ? maxDownDist : maxUpDist);
+
+        if (!player.isGrounded && !isOut)
         {
             var position = transform.position;
             position.y = lastYPos;
