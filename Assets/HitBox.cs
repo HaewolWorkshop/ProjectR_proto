@@ -12,6 +12,10 @@ public class HitBox : MonoBehaviour
         {
             other.GetComponent<Zombie>().Damage(5f);
         }
+        if (other.CompareTag("Breakable"))
+        {
+            other.GetComponent<Breakable>().Break(transform.position);
+        }
     }
 
     public void SetPlayer(Player temp)
