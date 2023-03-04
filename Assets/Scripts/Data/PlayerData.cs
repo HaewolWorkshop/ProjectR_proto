@@ -49,4 +49,10 @@ public class PlayerData : ScriptableObject
 
     [SerializeField] private float jumpPower;
     public float JumpPower => jumpPower;
+
+    [SerializeField] private float airMoveSpeed;
+    public float AirMoveSpeed => airMoveSpeed;
+
+    [SerializeField] private float fallingSpeed;
+    public float FallingSpeed => fallingSpeed;
 }

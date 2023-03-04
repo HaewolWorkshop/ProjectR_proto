@@ -15,4 +15,8 @@ MonoBehaviour:
   moveSpeed: 3
   rotationSpeed: 6
   stealthMoveMultiplier: 1
+  sprintSpeedMultiplier: 0
+  sprintXAxisMultiplier: 0
   jumpPower: 100
+  airMoveSpeed: 0.1
+  fallingSpeed: 5

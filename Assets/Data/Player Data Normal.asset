@@ -18,3 +18,5 @@ MonoBehaviour:
   sprintSpeedMultiplier: 2
   sprintXAxisMultiplier: 0.1
   jumpPower: 5
+  airMoveSpeed: 0.1
+  fallingSpeed: 5
