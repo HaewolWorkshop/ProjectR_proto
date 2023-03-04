@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5787060632258374191}
   - component: {fileID: 6560528899332483202}
   - component: {fileID: 4449918847547417489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -134,17 +134,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   moveSpeed: 1
-  rotateSpeed: 100
+  rotateSpeed: 3
   eye: {fileID: 7113645023071463184}
   sightAngle: 60
-  sightRange: 15
+  sightRange: 10
   sightLayerMask:
     serializedVersion: 2
     m_Bits: 209
-  attackRange: 3
+  attackRange: 1
   wanderSpots: {fileID: 0}
   wanderSpotRange: 1
-  wanderType: 0
+  wanderType: 1
   currentWanderingTargetSpot: -1
   canDamage: 1
 --- !u!1 &5091242709008108108
