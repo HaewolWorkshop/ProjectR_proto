@@ -11,7 +11,7 @@ public abstract class PlayerJumpState : FSMState<Player>
 
     protected abstract PlayerData data { get; }
 
-    private float moveSpeed;
+    protected float moveSpeed;
 
     public PlayerJumpState(IFSMEntity owner) : base(owner)
     {

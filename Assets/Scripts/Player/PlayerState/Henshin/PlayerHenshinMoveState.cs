@@ -22,6 +22,17 @@ public class PlayerHenshinMoveState : PlayerMoveState
         ownerEntity.SetAction(Player.ButtonActions.Grab, OnGrab);
     }
 
+    public override void FixedUpdateState()
+    {
+        base.FixedUpdateState();
+
+        if(ownerEntity.rigidbody.velocity.y < 0 && !ownerEntity.isGrounded)
+        {
+            ownerEntity.wtf = true;
+            ownerEntity.ChangeState(Player.States.HenshinJump);
+        }
+    }
+
     private void OnAttack(bool isOn)
     {
         if (isOn)

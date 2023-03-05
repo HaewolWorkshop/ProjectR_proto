@@ -21,16 +21,20 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         HenshinMove,
         HenshinGrab,
         HenshinJump,
+        HenshinFalling,
         HenshinGuard,
         HenshinAttackIdle,
         HenshinFirstAttack
     }
 
+    public bool wtf = false;
+
     private const float groundDist = 0.3f;
 
     public Material henshinMat;// 임시
 
-    public bool isGrounded { get; private set; }
+    public Collider[] groundObjects { get; private set; }
+    public bool isGrounded => (groundObjects?.Length ?? 0) != 0;
 
     public Rigidbody rigidbody { get; private set; }
     public Animator animator { get; private set; }
@@ -85,12 +89,13 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
     {
         CheckGround();
         base.FixedUpdate();
+        wtf = false;
     }
 
 
     private void CheckGround()
     {
-        isGrounded = Physics.OverlapSphere(transform.position, groundDist, groundLayer).Length != 0;
+        groundObjects = Physics.OverlapSphere(transform.position, groundDist, groundLayer);
     }
 
     public GameObject GetUpperRay()
