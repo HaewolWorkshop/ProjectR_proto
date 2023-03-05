@@ -9,6 +9,7 @@ public partial class Player
     public enum ButtonActions // bool 값으로 입력받는 액션
     {
         Henshin,
+        Aim,
         Attack,
         Grab,
         Guard,
@@ -79,6 +80,10 @@ public partial class Player
         buttonActions.Add(ButtonActions.Attack, inputActions.Player.Attack);
         inputActions.Player.Attack.started += (x) => GetAction(ButtonActions.Attack)?.Invoke(true);
         inputActions.Player.Attack.canceled += (x) => GetAction(ButtonActions.Attack)?.Invoke(false);
+
+        buttonActions.Add(ButtonActions.Aim, inputActions.Player.Aim);
+        inputActions.Player.Aim.started += (x) => GetAction(ButtonActions.Aim)?.Invoke(true);
+        inputActions.Player.Aim.canceled += (x) => GetAction(ButtonActions.Aim)?.Invoke(false);
 
 
         buttonActions.Add(ButtonActions.Grab, inputActions.Player.Grab);

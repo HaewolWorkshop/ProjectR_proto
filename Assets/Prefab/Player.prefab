@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2951507103481593334}
   smoothTime: 100
-  targetDistances: {x: 0.02, y: 0.1, z: 0.1}
+  maxDownDist: 0
+  maxUpDist: 0
+  targetDistances: {x: 0.01, y: 0.05, z: 0.05}
 --- !u!1 &984348623
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +160,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_DefaultVelocity: {x: 0, y: -0.2, z: 0}
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -166,6 +168,37 @@ MonoBehaviour:
   m_UseImpactDirection: 0
   m_ScaleImpactWithMass: 0
   m_ScaleImpactWithSpeed: 0
+--- !u!1 &1749971379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1749971380}
+  m_Layer: 0
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1749971380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749971379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2717539439442633633}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3810935865326776059
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2951507103481593334}
   smoothTime: 100
-  targetDistances: {x: 0.02, y: 0.1, z: 0.1}
+  maxDownDist: 0
+  maxUpDist: 0
+  targetDistances: {x: 0.01, y: 0.05, z: 0.05}
 --- !u!1 &4424787054827505161
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +385,6 @@ GameObject:
   - component: {fileID: 1496524849210142897}
   - component: {fileID: 2951507103481593336}
   - component: {fileID: 2951507103481593335}
-  - component: {fileID: 6493335793746649617}
   - component: {fileID: 2951507103481593333}
   - component: {fileID: 2951507103481593334}
   m_Layer: 6
@@ -384,7 +418,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8946478089969266221}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6c274fa04ebd778479f334d6bbb9e485, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
@@ -407,20 +441,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!136 &6493335793746649617
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8946478089969266221}
-  m_Material: {fileID: 13400000, guid: 6c274fa04ebd778479f334d6bbb9e485, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1.35
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.675, z: 0}
 --- !u!95 &2951507103481593333
 Animator:
   serializedVersion: 5
@@ -457,8 +477,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 129
+  grabLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   normalModel: {fileID: 2766635649748681549}
   henshinModel: {fileID: 8310987857760778715}
+  grabPoint: {fileID: 1749971380}
   stepNormalRayUpper: {fileID: 4424787054827505161}
   stepNormalRayLower: {fileID: 4593725145186591889}
   stepHeight: 0.15

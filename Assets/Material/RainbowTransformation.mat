@@ -40,7 +40,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Bloom: 2
-    - _NoisePower: 0
+    - _NoisePower: 2
     - _NoiseScale: 2
     - _QueueControl: 0
     - _QueueOffset: 0

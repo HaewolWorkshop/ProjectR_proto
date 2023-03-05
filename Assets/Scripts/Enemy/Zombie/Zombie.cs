@@ -19,6 +19,11 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
         Max
     }
 
+    public Transform hpCanvas;
+
+    public GameObject notice;
+    public Image hpBar;
+
     public float hp = 10f;
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 100.0f;
@@ -28,9 +33,12 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
     public LayerMask sightLayerMask;
     private static int playerLayer = -1;
     public float attackRange = 3f;
+    public float chaseRange = 10;
 
     private float sightHalfAngleInCos;
     private float sightRangeSquared;
+
+    private float currentHp;
 
     public enum WanderType
     {
@@ -54,6 +62,8 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
 
     private void Awake()
     {
+        currentHp = hp;
+
         sightHalfAngleInCos = Mathf.Cos(sightAngle * Mathf.Deg2Rad * 0.5f);
         sightRangeSquared = sightRange * sightRange;
         if (playerLayer < 0)
@@ -202,16 +212,21 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
     public bool canDamage = true;
     public void Damage(float amount)
     {
+        hpBar.transform.parent.gameObject.SetActive(true);
+
         if (!canDamage)
         {
             return;
         }
-        hp -= amount;
+        currentHp -= amount;
 
-        if (hp <= 0)
+        hpBar.fillAmount = currentHp / hp;
+
+        if (currentHp <= 0)
         {
-            hp = 0f;
+            currentHp = 0f;
             ChangeState(ZombieStates.Dead);
+            hpCanvas.gameObject.SetActive(false);
         }
         else
         {
@@ -219,8 +234,15 @@ public class Zombie : FSMPlayer<Zombie>, IFSMEntity
         }
     }
 
+    public void Attention(Vector3 position, float duration)
+    {
+
+    }
+
     protected override void Update()
     {
+        hpCanvas.LookAt(Camera.main.transform.position, Vector3.up);
+
         base.Update();
     }
 

@@ -12,6 +12,7 @@ public partial class Player : FSMPlayer<Player>, IFSMEntity
         NormalSprint,
         NormalStealth,
         NormalJump,
+        NormalThrow,
         NormalFall,
         
         Disengage,

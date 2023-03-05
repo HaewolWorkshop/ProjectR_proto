@@ -7,7 +7,8 @@ using UnityEngine;
 public enum CameraType
 {
     Normal3rdPerson,
-    Henshin3rdPerson
+    Henshin3rdPerson,
+    NormalAim
 }
 
 public class CameraManager : MonoBehaviour
