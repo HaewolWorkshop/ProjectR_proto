@@ -45,7 +45,7 @@ public class PlayerHenshinJumpState : PlayerJumpState
     {
         Debug.LogWarning(Mathf.Abs(fallingStartHeight - ownerEntity.transform.position.y));
 
-        if (Mathf.Abs(fallingStartHeight - ownerEntity.transform.position.y) > 4)
+        if (Mathf.Abs(fallingStartHeight - ownerEntity.transform.position.y) > 3.5f)
         {
             foreach (var obj in ownerEntity.groundObjects)
             {
