@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,6 +32,7 @@ public class ZombieWanderSpots : MonoBehaviour
 
     public bool IsNotEmpty() => Count > 0;
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!drawLines)
@@ -50,4 +51,5 @@ public class ZombieWanderSpots : MonoBehaviour
             Gizmos.DrawLine(spotPosition, next.position);
         }
     }
+#endif
 }
